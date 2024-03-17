@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
-using namespace std;
+using namespace std; //rever pois nao deve usar o namespace
 
 char *upper_str(char *str){
     int i = 0;
