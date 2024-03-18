@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
+#    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 13:52:02 by joe               #+#    #+#              #
-#    Updated: 2024/02/08 13:19:10 by joe              ###   ########.fr        #
+#    Updated: 2024/03/18 15:26:21 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,11 @@
 # *VARIABLES
 # *==============================================================================
 
-NAME		:=	megaphone
+NAME		:=	zombie
 CC			:=	c++
 CFLAGS		:=	-Wall -Werror -Wextra -std=c++98
-HEADERS		:=	includes
-SRCS		:=	megaphone.cpp
-
+HEADERS		:=	./megaphone.hpp
+SRCS		:=	./megaphone.cpp
 OBJS		:=	$(SRCS:.cpp=.o)
 
 # *==============================================================================
@@ -29,50 +28,41 @@ OBJS		:=	$(SRCS:.cpp=.o)
 EOC				:=	"\e[0m"
 ITALIC_GRAY		:=	"\e[3;37m"
 ITALIC_MAGENTA	:=	"\e[1;3;35m"
+ITALIC_GREEN 	:= 	"\e[1;3;32m"
 
 # *==============================================================================
-# *BUILD PERCENTAGE
+# *DEBUG
 # *==============================================================================
 
-ifndef ECHO
-	T := $(shell $(MAKE) $(MAKECMDGOALS) -n ECHO="counter" | grep -c "counter")
+ifdef DEBUG
+	CFLAGS		+= -g -fsanitize=address
 endif
 
-ifeq ($(firstword $(MAKECMDGOALS)), $(shell echo re))
-	T := $(shell expr $(words $(OBJS)) + 1)
-endif
-
-PRINT	:=	$(shell which echo) -e
-N := x
-C = $(words $(N))$(eval N := x $(N))
-P = "`expr $(C) '*' 100 / $(T)`"
-ECHO = $(PRINT) $(ITALIC_GRAY)"[$(P)%]\t"
-
 # *==============================================================================
-# *RECIPES
+# *ROLES
 # *==============================================================================
 
 all:		$(NAME)
 
-%.o:	%.cpp
-			@$(ECHO) Compiling $< $(EOC)
-			@$(CC) $(CFLAGS) -I $(HEADERS) -c $< -o $@
+%.o:	%.cpp $(HEADERS)
+			@echo $(ITALIC_GREEN) Compiling $(EOC)
+			@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
-			@$(ECHO) $(NAME) created! $(EOC)
+			@echo $(ITALIC_GREEN)$(NAME) created! $(EOC)
 			@$(CC) $(OBJS) $(CFLAGS) -o $@
+
+debug:
+	$(CC) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)
 
 clean:
 			@rm -rf $(OBJS)
-			@$(PRINT) $(ITALIC_MAGENTA)"Objects deleted"$(EOC)
+			@echo $(ITALIC_MAGENTA)"Objects deleted"$(EOC)
 
 fclean:		clean
 			@rm -f $(NAME)
-			@$(PRINT) $(ITALIC_MAGENTA)$(NAME)" deleted"$(EOC)
+			@echo $(ITALIC_MAGENTA)$(NAME)" deleted"$(EOC)
 
 re:			fclean all
 
-test:		all
-			./$(NAME)
-
-.PHONY:		all clean fclean re test
+.PHONY:		all clean fclean re

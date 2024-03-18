@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:16:19 by joe               #+#    #+#             */
-/*   Updated: 2024/02/22 19:12:16 by joe              ###   ########.fr       */
+/*   Updated: 2024/03/18 17:49:31 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
-
+#include "../includes/PhoneBook.hpp"
 
 // *=============================================================================
 // *CONSTRUCTOR AND DESTRUCTOR
@@ -29,22 +28,25 @@ PhoneBook::~PhoneBook(void){
 // *PRIVATE FUNCTIONS
 // *=============================================================================
 
-bool PhoneBook::_only_digits(const std::string& str) {
+bool PhoneBook::_only_digits(const std::string& str) 
+{
     // Verificar se todos os caracteres da string são dígitos
-    std::string::const_iterator it = str.begin();
-    while (it != str.end()) {
-        if (!std::isdigit(*it)) {
+    std::string::const_iterator i = str.begin();
+    while (i != str.end()) 
+	{
+        if (!std::isdigit(*i)) 
+		{
             return false;
         }
-        ++it;
+        ++i;
     }
     return true;
 }
 
 
-std::string PhoneBook::_get_input(std::string const field) {
+std::string PhoneBook::_get_input(std::string const field) 
+{
     std::string input;
-
     std::cout << "Please enter " << field << ":" << std::endl << "> ";
 
     // Lê a entrada do usuário
@@ -54,23 +56,21 @@ std::string PhoneBook::_get_input(std::string const field) {
             return EXIT;
 
     // Verifica se a entrada está vazia
-    else if (input.empty()) {
+    else if (input.empty()) 
+	{
         std::cout << "Please enter a value." << std::endl;
         return _get_input(field); // Chama recursivamente a função para solicitar novamente a entrada
     }
-
-	else if(field == "Phone Number"){
+	else if (field == "Phone Number")
+	{
 		if (_only_digits(input) == false)
 		{
 			std::cout << "Please enter a valid phone number." << std::endl;
 			return _get_input(field);
 		}
-		
 	}
-
     return input;
 }
-
 
 
 void	PhoneBook::_set_contact(Contact contact)
@@ -84,14 +84,13 @@ void	PhoneBook::_set_contact(Contact contact)
 
 void	PhoneBook::_display_phonebook_header(void)
 {
-	_print_n_times('*', 60);
+	_print_n_times('*', 45);
 	std::cout << "|" << std::setw(10) << "Index";
 	std::cout << "|" << std::setw(10) << "First Name";
 	std::cout << "|" << std::setw(10) << "Last Name";
 	std::cout << "|" << std::setw(10) << "Nickname";
-	std::cout << "|" << std::setw(10) << "Phone Number";
 	std::cout << "|" << std::endl;
-	_print_n_times('*', 60);
+	_print_n_times('*', 45);
 }
 
 void	PhoneBook::_display_contact_value(std::string value) const
@@ -110,14 +109,13 @@ void	PhoneBook::_display_contacts(int i) const
 	_display_contact_value(this->_contacts[i].get_first_name());
 	_display_contact_value(this->_contacts[i].get_last_name());
 	_display_contact_value(this->_contacts[i].get_nickname());
-	_display_contact_value(this->_contacts[i].get_phone_number());
 	std::cout << std::endl;
 }
 
 
 void	PhoneBook::_display_phonebook_footer(void)
 {
-	_print_n_times('*', 60);
+	_print_n_times('*', 45);
 	std::cout << std::endl;
 }
 
@@ -163,7 +161,7 @@ void	PhoneBook::prompt_search(void)
 	for (int i = 0; i <= 7; i++)
 	{
 		_display_contacts(i);
-		_print_n_times('*', 60);
+		_print_n_times('*', 45);
 		if (i == 7)
 			std::cout << std::endl;
 	}

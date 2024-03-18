@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:32:36 by joe               #+#    #+#             */
-/*   Updated: 2024/02/22 18:26:52 by joe              ###   ########.fr       */
+/*   Updated: 2024/03/18 15:43:11 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <iostream>
-#include "Contact.hpp"
+#include "../includes/Contact.hpp"
 
 // *=============================================================================
 // *CONSTRUCTOR AND DESTRUCTOR

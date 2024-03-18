@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include <iostream>
-using namespace std; //rever pois nao deve usar o namespace
-
-
 
 char *upper_str(char *str){
     int i = 0;
@@ -26,18 +23,19 @@ char *upper_str(char *str){
 }
 
 
-
-
-int main(int argc, char **argv){
+int main(int argc, char **argv)
+{
     int x = 0;
 
     if (argc == 1)
-        cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
-    else {
-        while (++x < argc){
-            cout << upper_str(argv[x]);
+        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+    else 
+    {
+        while (++x < argc)
+        {
+            std::cout << upper_str(argv[x]);
         }
-        cout << "\n";
+        std::cout << "\n";
     }
     return (0);
 }
