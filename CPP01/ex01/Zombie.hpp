@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:08:35 by joe               #+#    #+#             */
-/*   Updated: 2024/02/24 15:28:43 by joe              ###   ########.fr       */
+/*   Updated: 2024/03/18 19:56:58 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __ZOMBIE_H__
 # define __ZOMBIE_H__
 # include <iostream>
-# define HORDE_SIZE 10
+# define HORDE_SIZE 5
 
 class	Zombie
 {

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
+#    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/24 12:08:17 by joe               #+#    #+#              #
-#    Updated: 2024/03/01 11:51:37 by joe              ###   ########.fr        #
+#    Updated: 2024/03/18 19:26:21 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS		:=	$(SRCS:.cpp=.o)
 EOC				:=	"\e[0m"
 ITALIC_GRAY		:=	"\e[3;37m"
 ITALIC_MAGENTA	:=	"\e[1;3;35m"
-ITALIC_GREEN 	:= 	"\e[3;32m"
+ITALIC_GREEN 	:= 	"\e[1;3;32m"
 
 # *==============================================================================
 # *DEBUG
@@ -45,11 +45,11 @@ endif
 all:		$(NAME)
 
 %.o:	%.cpp $(HEADERS)
-			@echo $(ITALIC_GREEN) Compiling $<$(EOC)
+			@echo $(ITALIC_GRAY) Compiling $<$(EOC)
 			@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
-			@echo $(NAME) created! $(EOC)
+			@echo $(ITALIC_GREEN)$(NAME) created! $(EOC)
 			@$(CC) $(OBJS) $(CFLAGS) -o $@
 
 debug:
