@@ -6,7 +6,7 @@
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 15:37:11 by joe               #+#    #+#              #
-#    Updated: 2024/03/18 15:45:39 by jcruz-da         ###   ########.fr        #
+#    Updated: 2024/03/18 22:09:33 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 # ==============================================================================
 
 NAME		:=	PhoneBook
-CC			:=	c++
+CXX			:=	c++
 CFLAGS		:=	-Wall -Werror -Wextra -std=c++98
 HEADERS		:=	./includes/Contact.hpp	./includes/PhoneBook.hpp	
 SRCS		:=	./sources/Contact.cpp	./sources/PhoneBook.cpp		./sources/main.cpp
@@ -47,12 +47,12 @@ all:		$(NAME)
 
 %.o:	source/%.cpp
 			@$(ECHO) Compiling $< $(EOC)
-			@$(CC) $(CFLAGS) -I $(HEADERS) -c $< -o $@
+			@$(CXX) $(CFLAGS) -I $(HEADERS) -c $< -o $@
 
 
 $(NAME):	$(OBJS)
 			@echo $(ITALIC_GREEN)$(NAME) created! $(EOC)
-			@$(CC) $(OBJS) $(CFLAGS) -o $@
+			@$(CXX) $(OBJS) $(CFLAGS) -o $@
 
 debug:
 	$(CC) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)

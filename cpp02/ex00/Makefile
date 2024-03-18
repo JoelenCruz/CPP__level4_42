@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/07 13:52:02 by joe               #+#    #+#              #
-#    Updated: 2024/03/18 15:26:21 by jcruz-da         ###   ########.fr        #
+#    Created: 2024/03/18 20:13:45 by jcruz-da          #+#    #+#              #
+#    Updated: 2024/03/18 20:14:44 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@
 NAME		:=	zombie
 CC			:=	c++
 CFLAGS		:=	-Wall -Werror -Wextra -std=c++98
-HEADERS		:=	./megaphone.hpp
-SRCS		:=	./megaphone.cpp
+HEADERS		:=	./Fixed.hpp
+SRCS		:=	./main.cpp ./Fixed.cpp 
 OBJS		:=	$(SRCS:.cpp=.o)
 
 # *==============================================================================
@@ -45,7 +45,7 @@ endif
 all:		$(NAME)
 
 %.o:	%.cpp $(HEADERS)
-			@echo $(ITALIC_GREEN) Compiling $(EOC)
+			@echo $(ITALIC_GRAY) Compiling $<$(EOC)
 			@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
