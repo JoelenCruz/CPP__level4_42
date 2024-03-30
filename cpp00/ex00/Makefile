@@ -6,7 +6,7 @@
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 13:52:02 by joe               #+#    #+#              #
-#    Updated: 2024/03/18 22:10:35 by jcruz-da         ###   ########.fr        #
+#    Updated: 2024/03/29 15:45:40 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME		:=	megaphone
 CXX			:=	c++
-CFLAGS		:=	-Wall -Werror -Wextra -std=c++98
+CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 HEADERS		:=	./megaphone.hpp
 SRCS		:=	./megaphone.cpp
 OBJS		:=	$(SRCS:.cpp=.o)
@@ -35,7 +35,7 @@ ITALIC_GREEN 	:= 	"\e[1;3;32m"
 # *==============================================================================
 
 ifdef DEBUG
-	CFLAGS		+= -g -fsanitize=address
+	CXXFLAGS		+= -g -fsanitize=address
 endif
 
 # *==============================================================================
@@ -46,11 +46,11 @@ all:		$(NAME)
 
 %.o:	%.cpp $(HEADERS)
 			@echo $(ITALIC_GREEN) Compiling $<$(EOC)
-			@$(CXX) $(CFLAGS) -c $< -o $@
+			$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
 			@echo $(ITALIC_GREEN)$(NAME) created! $(EOC)
-			@$(CXX) $(OBJS) $(CFLAGS) -o $@
+			$(CXX) $(OBJS) $(CXXFLAGS) -o $@
 
 debug:
 	$(CXX) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)

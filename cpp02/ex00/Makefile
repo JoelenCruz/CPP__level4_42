@@ -6,7 +6,7 @@
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/18 20:13:45 by jcruz-da          #+#    #+#              #
-#    Updated: 2024/03/18 20:14:44 by jcruz-da         ###   ########.fr        #
+#    Updated: 2024/03/30 12:49:48 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@
 # *VARIABLES
 # *==============================================================================
 
-NAME		:=	zombie
-CC			:=	c++
-CFLAGS		:=	-Wall -Werror -Wextra -std=c++98
+NAME		:=	fixed
+CXX			:=	c++
+CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 HEADERS		:=	./Fixed.hpp
 SRCS		:=	./main.cpp ./Fixed.cpp 
 OBJS		:=	$(SRCS:.cpp=.o)
@@ -46,14 +46,14 @@ all:		$(NAME)
 
 %.o:	%.cpp $(HEADERS)
 			@echo $(ITALIC_GRAY) Compiling $<$(EOC)
-			@$(CC) $(CFLAGS) -c $< -o $@
+			$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
 			@echo $(ITALIC_GREEN)$(NAME) created! $(EOC)
-			@$(CC) $(OBJS) $(CFLAGS) -o $@
+			$(CXX) $(OBJS) $(CXXFLAGS) -o $@
 
 debug:
-	$(CC) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)
+	$(CXX) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)
 
 clean:
 			@rm -rf $(OBJS)

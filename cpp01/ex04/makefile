@@ -3,22 +3,22 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
+#    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 19:56:42 by joe               #+#    #+#              #
-#    Updated: 2024/03/01 11:55:59 by joe              ###   ########.fr        #
+#    Updated: 2024/03/29 17:22:39 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 # *==============================================================================
 # *VARIABLES
 # *==============================================================================
 
 NAME		:=	replace
-CC			:=	c++
-CFLAGS		:=	-Wall -Werror -Wextra -std=c++98
-SRCS		:=	./main.cpp
+CXX			:=	c++
+CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
+HEADERS		:=	./replace.cpp
+SRCS		:=	./main.cpp ./replace.cpp
 OBJS		:=	$(SRCS:.cpp=.o)
 
 # *==============================================================================
@@ -28,7 +28,7 @@ OBJS		:=	$(SRCS:.cpp=.o)
 EOC				:=	"\e[0m"
 ITALIC_GRAY		:=	"\e[3;37m"
 ITALIC_MAGENTA	:=	"\e[1;3;35m"
-ITALIC_GREEN 	:= 	"\e[3;32m"
+ITALIC_GREEN 	:= 	"\e[1;3;32m"
 
 # *==============================================================================
 # *DEBUG
@@ -45,15 +45,15 @@ endif
 all:		$(NAME)
 
 %.o:	%.cpp $(HEADERS)
-			@echo $(ITALIC_GREEN) Compiling $<$(EOC)
-			@$(CC) $(CFLAGS) -c $< -o $@
+			@echo $(ITALIC_GRAY) Compiling $<$(EOC)
+			$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
-			@echo $(NAME) created! $(EOC)
-			@$(CC) $(OBJS) $(CFLAGS) -o $@
+			@echo $(ITALIC_GREEN)$(NAME) created! $(EOC)
+			$(CXX) $(OBJS) $(CXXFLAGS) -o $@
 
 debug:
-	$(CC) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)
+	$(CXX) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)
 
 clean:
 			@rm -rf $(OBJS)

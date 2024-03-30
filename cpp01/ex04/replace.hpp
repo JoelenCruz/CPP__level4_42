@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   replace.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 19:34:36 by joe               #+#    #+#             */
-/*   Updated: 2024/03/29 16:57:09 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/03/29 17:18:40 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/03/29 17:20:10 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __HUMANA_HPP
-#define __HUMANA_HPP
 
-# include <iostream>
-# include "Weapon.hpp"
+#ifndef __REPLACE_HPP
+#define __REPLACE_HPP
 
-class	HumanA
-{
-	private:
-		std::string	_name;
-		Weapon	&_weapon;
+# include <iostream>	// std::cout, std::string
+# include <fstream>		// std::ifstream, std::ofstream
 
-	public:
-		HumanA(std::string name, Weapon &weapon);
-		~HumanA(void);
-		
-		void	attack(void);
-};
+bool	search_empty(std::string search);
+void replaceAll(std::string& str, const std::string& from, const std::string& to);
+void replaceInFile(const std::string& filename, const std::string& s1, const std::string& s2);
 
 #endif

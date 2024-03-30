@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/24 12:08:17 by joe               #+#    #+#              #
-#    Updated: 2024/03/29 15:38:11 by jcruz-da         ###   ########.fr        #
+#    Created: 2024/03/30 16:25:19 by jcruz-da          #+#    #+#              #
+#    Updated: 2024/03/30 16:30:02 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,12 @@
 # *VARIABLES
 # *==============================================================================
 
-NAME		:=	zombie
+NAME		:=	fixed
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
-HEADERS		:=	./Zombie.hpp
-SRCS		:=	./main.cpp ./Zombie.cpp ./newZombie.cpp ./randomChump.cpp
+HEADERS		:=	./Fixed.hpp
+SRCS		:=	./main.cpp ./Fixed.cpp 
 OBJS		:=	$(SRCS:.cpp=.o)
-
 
 # *==============================================================================
 # *COLORS
@@ -36,7 +35,7 @@ ITALIC_GREEN 	:= 	"\e[1;3;32m"
 # *==============================================================================
 
 ifdef DEBUG
-	CXXFLAGS		+= -g -fsanitize=address
+	CFLAGS		+= -g -fsanitize=address
 endif
 
 # *==============================================================================
@@ -46,12 +45,12 @@ endif
 all:		$(NAME)
 
 %.o:	%.cpp $(HEADERS)
-			@echo $(ITALIC_GREEN) Compiling $<$(EOC)
+			@echo $(ITALIC_GRAY) Compiling $<$(EOC)
 			$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
 			@echo $(ITALIC_GREEN)$(NAME) created! $(EOC)
-			$(CXX) $(CXXFLAGS) $(OBJS)  -o $@
+			$(CXX) $(OBJS) $(CXXFLAGS) -o $@
 
 debug:
 	$(CXX) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)

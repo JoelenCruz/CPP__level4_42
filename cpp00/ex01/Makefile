@@ -6,7 +6,7 @@
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 15:37:11 by joe               #+#    #+#              #
-#    Updated: 2024/03/18 22:09:33 by jcruz-da         ###   ########.fr        #
+#    Updated: 2024/03/29 15:32:07 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME		:=	PhoneBook
 CXX			:=	c++
-CFLAGS		:=	-Wall -Werror -Wextra -std=c++98
+CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 HEADERS		:=	./includes/Contact.hpp	./includes/PhoneBook.hpp	
 SRCS		:=	./sources/Contact.cpp	./sources/PhoneBook.cpp		./sources/main.cpp
 OBJS		:=	$(SRCS:.cpp=.o)
@@ -36,7 +36,7 @@ ITALIC_GREEN 	:= 	"\e[1;3;32m"
 # *==============================================================================
 
 ifdef DEBUG
-	CFLAGS		+= -g -fsanitize=address
+	CXXFLAGS		+= -g -fsanitize=address
 endif
 
 # *==============================================================================
@@ -47,12 +47,12 @@ all:		$(NAME)
 
 %.o:	source/%.cpp
 			@$(ECHO) Compiling $< $(EOC)
-			@$(CXX) $(CFLAGS) -I $(HEADERS) -c $< -o $@
+			@$(CXX) $(CXXFLAGS) -I $(HEADERS) -c $< -o $@
 
 
 $(NAME):	$(OBJS)
 			@echo $(ITALIC_GREEN)$(NAME) created! $(EOC)
-			@$(CXX) $(OBJS) $(CFLAGS) -o $@
+			@$(CXX) $(OBJS) $(CXXFLAGS) -o $@
 
 debug:
 	$(CC) -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address  -o $(NAME) $(SRCS)

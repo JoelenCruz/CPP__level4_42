@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 19:34:36 by joe               #+#    #+#             */
-/*   Updated: 2024/03/29 16:57:09 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/03/30 17:10:12 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/03/30 17:10:43 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __HUMANA_HPP
-#define __HUMANA_HPP
+#include <iostream>
+#include "Fixed.hpp"
 
-# include <iostream>
-# include "Weapon.hpp"
-
-class	HumanA
+int main( void ) 
 {
-	private:
-		std::string	_name;
-		Weapon	&_weapon;
+    Fixed a;
+    Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+    std::cout << a << std::endl;
+    std::cout << ++a << std::endl;
+    std::cout << a << std::endl;
+    std::cout << a++ << std::endl;
+    std::cout << a << std::endl;
+    std::cout << b << std::endl;
+    std::cout << Fixed::max( a, b ) << std::endl;
+    return 0;
+}
 
-	public:
-		HumanA(std::string name, Weapon &weapon);
-		~HumanA(void);
-		
-		void	attack(void);
-};
-
-#endif

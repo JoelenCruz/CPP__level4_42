@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:08:21 by joe               #+#    #+#             */
-/*   Updated: 2024/02/24 12:57:18 by joe              ###   ########.fr       */
+/*   Updated: 2024/03/29 16:11:02 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int main(void)
 {
     Zombie *zombie;
 
-    zombie = newZombie("Heap");
+    zombie = newZombie("Joe");
     zombie->announce();
-    randomChump("Stack");
+    randomChump("Elen");
     delete zombie;
     return (0);
 }

@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:08:31 by joe               #+#    #+#             */
-/*   Updated: 2024/02/24 15:22:51 by joe              ###   ########.fr       */
+/*   Updated: 2024/03/29 16:21:28 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+
+// *=============================================================================
+// *CONSTRUCTOR AND DESTRUCTOR
+// *=============================================================================
 
 Zombie::Zombie(void) //construtor sem parametros
 {
@@ -28,10 +32,13 @@ Zombie::~Zombie(void)
 }
 
 
-//!functions
+// *=============================================================================
+// *PUBLIC FUNCTIONS
+// *=============================================================================
+
 void Zombie::announce(void)
 {
-    std::cout << this->_name << " BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
 void Zombie::setName(std::string name)

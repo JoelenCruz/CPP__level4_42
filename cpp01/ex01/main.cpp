@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:08:21 by joe               #+#    #+#             */
-/*   Updated: 2024/03/18 19:59:28 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:31:06 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	main()
         return (0);
     }
 	
-	Zombie	*zombies, zombie("Stack");
+	Zombie	*zombies; 
+	Zombie zombie("Joe");
 
-	zombies = zombieHorde(HORDE_SIZE, "Heap");
+	zombies = zombieHorde(HORDE_SIZE, "Elen");
 	
 	for (int i = 0; i < HORDE_SIZE; i++)
 		(zombies + i)->announce();

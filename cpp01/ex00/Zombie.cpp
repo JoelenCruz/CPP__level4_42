@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:08:31 by joe               #+#    #+#             */
-/*   Updated: 2024/02/24 12:25:18 by joe              ###   ########.fr       */
+/*   Updated: 2024/03/29 16:17:21 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+
+
+// *=============================================================================
+// *CONSTRUCTOR AND DESTRUCTOR
+// *=============================================================================
 
 Zombie::Zombie(std::string name) : _name(name)
 {
@@ -22,7 +27,12 @@ Zombie::~Zombie(void)
     std::cout << this->_name << " is dead!" << std::endl;
 }
 
+
+// *=============================================================================
+// *PUBLIC FUNCTIONS
+// *=============================================================================
+
 void Zombie::announce(void)
 {
-    std::cout << this->_name << " BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
