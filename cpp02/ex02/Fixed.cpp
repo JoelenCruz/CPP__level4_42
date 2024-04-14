@@ -6,102 +6,78 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:11:06 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/03/30 17:14:10 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/04/14 12:19:39 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#define SHOW_MSG true
 
-#include "Fixed.hpp"
+// *=============================================================================
+// *CONSTRUCTOR & DESTRUCTOR
+// *=============================================================================
 
-#define SHOW_MSG false
 
-// =============================================================================
-// CONSTRUCTOR & DESTRUCTOR
-// =============================================================================
-
-/**
- * @brief Construct a new Fixed:: Fixed object
- * 
- */
-Fixed::Fixed(void) : _raw(0)
+Fixed::Fixed(void) : _nbInt(0)
 {
 	if (SHOW_MSG == true)
-		LOG("Default constructor called");
+		PRINT("Default constructor called");
+	return ;
+}
+
+
+Fixed::Fixed(const int value) : _nbInt(value << _nbFractional)
+{
+	if (SHOW_MSG == true)
+		PRINT("Int constructor called");
 	return ;
 }
 
 /**
  * @brief Construct a new Fixed:: Fixed object
  * 
- * @param value The _raw value.
- */
-Fixed::Fixed(const int value) : _raw(value << _fractionBits)
-{
-	if (SHOW_MSG == true)
-		LOG("Int constructor called");
-	return ;
-}
-
-/**
- * @brief Construct a new Fixed:: Fixed object
- * 
- * @param value The _raw value.
+ * @param value The _nbInt value.
  */
 // Since 'value' is float can't bitshift it directly, so 'roundf' must be used.
-Fixed::Fixed(const float value) : _raw(roundf(value * (1 << _fractionBits)))
+Fixed::Fixed(const float value) : _nbInt(roundf(value * (1 << _nbFractional)))
 {
 	if (SHOW_MSG == true)
-		LOG("Float constructor called");
+		PRINT("Float constructor called");
 	return ;
 }
 
-/**
- * @brief Construct a new Fixed:: Fixed object
- * 
- * @param src The fixed object to be copied.
- */
 Fixed::Fixed(Fixed const &src)
 {
 	if (SHOW_MSG == true)
-		LOG("Copy constructor called");
+		PRINT("Copy constructor called");
 	*this = src;
 	return ;
 }
 
-/**
- * @brief Destroy the Fixed:: Fixed object
- * 
- */
 Fixed::~Fixed(void)
 {
 	if (SHOW_MSG == true)
-		LOG("Destructor called");
+		PRINT("Destructor called");
 	return ;
 }
 
-// =============================================================================
-// OPERATORS
-// =============================================================================
+// *=============================================================================
+// *OPERATORS
+// *=============================================================================
 
-/**
- * @brief Overload for the '=' operator.
- * 
- * @param rhs The right hand side varible to be assigned.
- * @return Fixed& A pointer to the assigned Fixed object.
- */
+
 Fixed & Fixed::operator= (Fixed const &rhs)
 {
 	if (SHOW_MSG == true)
-		LOG("Copy assignment operator called")
+		PRINT("Copy assignment operator called")
 	if (this != &rhs)
-		_raw = rhs.getRawBits();
+		_nbInt = rhs.getRawBits();
 	return *this;
 }
 
-// =============================================================================
-// LOGIC OPERATORS OVERLOAD
-// =============================================================================
+// *=============================================================================
+// *LOGIC OPERATORS OVERLOAD
+// *=============================================================================
 
 /**
  * @brief Overload for the '>' operator.
@@ -110,7 +86,7 @@ Fixed & Fixed::operator= (Fixed const &rhs)
  * @return true When the object is greater than the 'rhs' object.
  * @return false When the object isn't greater than the 'rhs' object.
  */
-bool	Fixed::operator > (const Fixed &rhs) const
+bool	Fixed::operator> (const Fixed &rhs) const
 {
 	return (getRawBits() > rhs.getRawBits());
 }
@@ -122,7 +98,7 @@ bool	Fixed::operator > (const Fixed &rhs) const
  * @return true When the object is lesser than the 'rhs' object.
  * @return false When the object isn't lesser than the 'rhs' object.
  */
-bool	Fixed::operator < (const Fixed &rhs) const
+bool	Fixed::operator< (const Fixed &rhs) const
 {
 	return (getRawBits() < rhs.getRawBits());
 }
@@ -134,7 +110,7 @@ bool	Fixed::operator < (const Fixed &rhs) const
  * @return true When the object is greater than or equal to the 'rhs' object.
  * @return false When the object isn't greater than or equal to the 'rhs' object.
  */
-bool	Fixed::operator >= (const Fixed &rhs) const
+bool	Fixed::operator>= (const Fixed &rhs) const
 {
 	return (getRawBits() >= rhs.getRawBits());
 }
@@ -146,7 +122,7 @@ bool	Fixed::operator >= (const Fixed &rhs) const
  * @return true When the object is lesser than or equal to the 'rhs' object.
  * @return false When the object isn't lesser than or equal to the 'rhs' object.
  */
-bool	Fixed::operator <= (const Fixed &rhs) const
+bool	Fixed::operator<= (const Fixed &rhs) const
 {
 	return (getRawBits() <= rhs.getRawBits());
 }
@@ -175,9 +151,9 @@ bool	Fixed::operator != (const Fixed &rhs) const
 	return (getRawBits() != rhs.getRawBits());
 }
 
-// =============================================================================
-// ARITHMETIC OPERTATORS OVERLOAD
-// =============================================================================
+// *=============================================================================
+// *ARITHMETIC OPERTATORS OVERLOAD
+// *=============================================================================
 
 /**
  * @brief Overload for the '+' operator.
@@ -219,7 +195,7 @@ Fixed	Fixed::operator * (const Fixed &rhs) const
 }
 
 /**
- * @brief Overload for the '-' operator.
+ * @brief Overload for the '/' operator.
  * 
  * @param rhs The right hand side variable to be divided from.
  * @return Fixed The division's result.
@@ -229,18 +205,18 @@ Fixed	Fixed::operator / (const Fixed &rhs) const
 	return (Fixed(this->toFloat() / rhs.toFloat()));
 }
 
-// =============================================================================
-// INCREMENTE AND DECREMENT OPERATORS OVERLOAD
-// =============================================================================
+// *=============================================================================
+// *INCREMENTE AND DECREMENT OPERATORS OVERLOAD
+// *=============================================================================
 
 /**
  * @brief Overload for the '++' operator.
  * 
- * @return Fixed& A pointer to the object after '_raw' is incremented.
+ * @return Fixed& A pointer to the object after '_nbInt' is incremented.
  */
 Fixed	&Fixed::operator ++ (void)
 {
-	++this->_raw;
+	++this->_nbInt;
 	return (*this);
 }
 
@@ -253,18 +229,18 @@ Fixed	Fixed::operator ++ (int)
 {
 	Fixed	i = *this;
 	
-	this->_raw++;
+	this->_nbInt++;
 	return (i);
 }
 
 /**
  * @brief Overload for the '--' operator.
  * 
- * @return Fixed& A pointer to the object after '_raw' is decremented.
+ * @return Fixed& A pointer to the object after '_nbInt' is decremented.
  */
 Fixed	&Fixed::operator -- (void)
 {
-	--this->_raw;
+	--this->_nbInt;
 	return (*this);
 }
 
@@ -277,13 +253,13 @@ Fixed	Fixed::operator -- (int)
 {
 	Fixed	i = *this;
 	
-	this->_raw--;
+	this->_nbInt--;
 	return (i);
 }
 
-// =============================================================================
-// MIN AND MAX OPERATORS OVERLOAD
-// =============================================================================
+// *=============================================================================
+// *MIN AND MAX OPERATORS OVERLOAD
+// *=============================================================================
 
 /**
  * @brief Overload for the 'min' operator
@@ -294,7 +270,7 @@ Fixed	Fixed::operator -- (int)
  */
 Fixed	&Fixed::min(Fixed &lhs, Fixed &rhs)
 {
-	return (lhs > rhs ? rhs : lhs);
+	return (lhs > rhs ? rhs : lhs); //ternario
 }
 
 /**
@@ -333,38 +309,38 @@ Fixed	&Fixed::max(Fixed const &lhs, Fixed const &rhs)
 	return (Fixed::max((Fixed &)lhs, (Fixed &)rhs));
 }
 
-// =============================================================================
-// GETTERS
-// =============================================================================
+// *=============================================================================
+// *GETTERS
+// *=============================================================================
 
 /**
- * @brief Gets the value in _raw
+ * @brief Gets the value in _nbInt
  * 
- * @return int _raw
+ * @return int _nbInt
  */
 int	Fixed::getRawBits(void) const
 {
-	return (this->_raw);
+	return (this->_nbInt);
 }
 
-// =============================================================================
-// SETTERS
-// =============================================================================
+// *=============================================================================
+// *SETTERS
+// *=============================================================================
 
 /**
- * @brief Sets a new value to _raw
+ * @brief Sets a new value to _nbInt
  * 
- * @param raw The new value to _raw.
+ * @param raw The new value to _nbInt.
  */
 void	Fixed::setRawBits(int const raw)
 {
-	this->_raw = raw;
+	this->_nbInt = raw;
 	return ;
 }
 
-// =============================================================================
-// FUNCTIONS
-// =============================================================================
+// *=============================================================================
+// *FUNCTIONS
+// *=============================================================================
 
 /**
  * @brief Converts rawBits into float.
@@ -373,7 +349,7 @@ void	Fixed::setRawBits(int const raw)
  */
 float	Fixed::toFloat(void) const
 {
-	return ((float)getRawBits() / (1 << _fractionBits));
+	return ((float)getRawBits() / (1 << _nbFractional));
 }
 
 /**
@@ -383,7 +359,7 @@ float	Fixed::toFloat(void) const
  */
 int	Fixed::toInt(void) const
 {
-	return (getRawBits() >> _fractionBits);
+	return (getRawBits() >> _nbFractional);
 }
 
 /**

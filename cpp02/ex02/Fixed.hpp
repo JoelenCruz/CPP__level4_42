@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:11:22 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/03/30 17:11:25 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:52:21 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,32 @@ class Fixed
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
 		int		toInt(void) const;
+
+		//* Overload of logic operators
+		bool	operator > (const Fixed &rhs) const;
+		bool	operator < (const Fixed &rhs) const;
+		bool	operator >= (const Fixed &rhs) const;
+		bool	operator <= (const Fixed &rhs) const;
+		bool	operator == (const Fixed &rhs) const;
+		bool	operator != (const Fixed &rhs) const;
+
+		//* Overload of arithmetic operators
+		Fixed	operator + (const Fixed &rhs) const;
+		Fixed	operator - (const Fixed &rhs) const;
+		Fixed	operator * (const Fixed &rhs) const;
+		Fixed	operator / (const Fixed &rhs) const;
+
+		//* Overload of increment/decrement operators
+		Fixed	& operator ++ (void);
+		Fixed	operator ++ (int);
+		Fixed	& operator -- (void);
+		Fixed	operator -- (int);
+
+		//* Overload member functions
+		static Fixed	&min(Fixed &lhs, Fixed &rhs);
+		static Fixed	&min(Fixed const &lhs, Fixed const &rhs);
+		static Fixed	&max(Fixed &lhs, Fixed &rhs);
+		static Fixed	&max(Fixed const &lhs, Fixed const &rhs);
 };
 
 std::ostream & operator << (std::ostream & o, Fixed const & i);

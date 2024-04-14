@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 16:25:49 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/03/30 17:04:30 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:41:09 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Fixed::Fixed(Fixed const &src)
 /**
  * @brief Constrói um novo objeto Fixed.
  * 
- * @param value O valor _raw.
+ * @param value O valor _nbInt.
  */
 Fixed::Fixed(const int value) : _nbInt(value << _nbFractional)
 {
@@ -43,7 +43,7 @@ Fixed::Fixed(const int value) : _nbInt(value << _nbFractional)
 /**
  * @brief Construct a new Fixed:: Fixed object
  * 
- * @param value The _raw value.
+ * @param value The _nbInt value.
  */
 // Since 'value' is float can't bitshift it directly, so 'roundf' must be used.
 Fixed::Fixed(const float value) : _nbInt(roundf(value * (1 << _nbFractional)))
@@ -75,9 +75,9 @@ Fixed & Fixed::operator= (Fixed const &rhs)
 // *=============================================================================
 
 /**
- * @brief Gets the value in _raw
+ * @brief Gets the value in _nbInt
  * 
- * @return int _raw
+ * @return int _nbInt
  */
 int	Fixed::getRawBits(void) const
 {
@@ -89,9 +89,9 @@ int	Fixed::getRawBits(void) const
 // *=============================================================================
 
 /**
- * @brief Sets a new value to _raw
+ * @brief Sets a new value to _nbInt
  * 
- * @param raw The new value to _raw.
+ * @param raw The new value to _nbInt.
  */
 void	Fixed::setRawBits(int const raw)
 {

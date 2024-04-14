@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:13:24 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/03/30 16:09:34 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:09:10 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,6 @@ Fixed & Fixed::operator= (Fixed const &rhs)
 // *GETTERS
 // *=============================================================================
 
-/**
- * @brief Gets the value in _raw
- * 
- * @return int _raw
- */
 int	Fixed::getRawBits(void) const
 {
 	PRINT("getRawBits member function called")
@@ -66,11 +61,6 @@ int	Fixed::getRawBits(void) const
 // *SETTERS
 // *=============================================================================
 
-/**
- * @brief Sets a new value to _raw
- * 
- * @param raw The new value to _raw.
- */
 void	Fixed::setRawBits(int const raw)
 {
 	this->_nbInt = raw;
