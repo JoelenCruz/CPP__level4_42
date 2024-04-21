@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:03:49 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/14 21:04:48 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/04/21 14:43:17 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,27 @@
 ClapTrap::ClapTrap(void): _name("Default"), _hitPoints(10), _attacksPoints(10), _damage(0)
 {
     if (MSG == true)
-        PRINT("🌞 ClapTrap Default constructor called");
+        PRINT("🌞 ClapTrap Default constructor!");
     return;
 }
 
 ClapTrap::ClapTrap(std::string const name): _name(name), _hitPoints(10), _attacksPoints(10), _damage(0)
 {
     if (MSG == true)
-	    PRINT("🌞 ClapTrap String Name constructor called");
+	{
+	    PRINT("🌞 ClapTrap constructor with name!");
+		PRINT(name);
+	}
     return;
 }
 
 ClapTrap::ClapTrap(ClapTrap const &src)
 {
 	if(MSG == true)
-		PRINT("⚪ ClapTrap Copy constructor called");
+	{
+		PRINT("🌞 ClapTrap Copy constructor!");
+		PRINT(src);
+	}
 	setName(src.getName());
 	setHitPoints(src.getHitPoints());
 	setAttacksPoints(src.getAttacksPoints());
@@ -46,29 +52,26 @@ ClapTrap::ClapTrap(ClapTrap const &src)
 ClapTrap::~ClapTrap(void)
 {
     if (MSG == true)
-        PRINT("Default destructor called");
+        PRINT("❌ ClapTrap Default destructor!");
     return;
 }
 
-// =============================================================================
-// CONSTRUCTOR FOR DERIVED CLASSES
-// =============================================================================
-
-//ClapTrap(std::string const &name, int hitPoints, int attacksPoints, int damage);
-//lapTrap(int hitPoints, int attacksPoints, int Damage);
+// *=============================================================================
+// *CONSTRUCTOR FOR DERIVED CLASSES
+// *=============================================================================
 
 ClapTrap::ClapTrap(int hitPoints, int attacksPoints, int damage)
 		: _name("Default"), _hitPoints(hitPoints), _attacksPoints(attacksPoints), _damage(damage)
 {
 	if (MSG == true)
-		PRINT("⚪ ClapTrap Default protected construtor called");
+		PRINT("⚪ ClapTrap Default protected construtor!");
 }
 
 ClapTrap::ClapTrap(std::string const &name, int hitPoints, int attacksPoints, int damage)
 		: _name(name), _hitPoints(hitPoints), _attacksPoints(attacksPoints), _damage(damage)
 {
 	if (MSG == true)
-		PRINT("⚪ ClapTrap protected constructor called");
+		PRINT("⚪ ClapTrap protected constructor called!");
 }
 
 
@@ -79,7 +82,10 @@ ClapTrap::ClapTrap(std::string const &name, int hitPoints, int attacksPoints, in
 ClapTrap & ClapTrap::operator = (ClapTrap const &rhs)
 {
 	if (MSG == true)
-		PRINT("⚪ Assignment operator called");
+	{
+		PRINT("🌞🟰🌞 Assignment operator!");
+		PRINT(rhs);	
+	}
 	if (this != &rhs)
 	{
 		setName(rhs.getName());

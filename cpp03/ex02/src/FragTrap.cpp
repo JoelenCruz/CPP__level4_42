@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 20:34:06 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/21 14:43:08 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/04/21 13:50:56 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/04/21 14:56:34 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 #define MSG true
 
@@ -18,39 +18,36 @@
 // *CONSTRUCTORS AND DESTRUCTOR
 // *=============================================================================
 
-ScavTrap::ScavTrap(void) : ClapTrap("Default", 100, 50, 20)
+
+FragTrap::FragTrap(void) : ClapTrap("Default", 100, 100, 30)
 {
 	if (MSG == true)
-		PRINT("⚫ ScavTrap Default constructor!");
+		PRINT("🪤 FragTrap Default constructor!");
 	return ;
 }
 
 
-ScavTrap::ScavTrap(std::string const &name) : ClapTrap(name, 100, 50, 20)
+FragTrap::FragTrap(std::string const &name) : ClapTrap(name, 100, 100, 30)
 {
 	if (MSG == true)
-	{
-		PRINT("⚫ ScavTrap constructor with name!");
-		PRINT(name);
-	}
+		PRINT("🪤 FragTrap constructor whit name!");
 	return ;
 }
 
 
-ScavTrap::ScavTrap(ScavTrap const &src) : ClapTrap(src)
+FragTrap::FragTrap(FragTrap const &src) : ClapTrap(src)
 {
 	if (MSG == true)
-	{
-		PRINT("⚫ ScavTrap Copy constructor!");
-		PRINT(src);
-	}
+		PRINT("🪤 FragTrap Copy construtor!");
 	return ;
+	
 }
 
-ScavTrap::~ScavTrap(void)
+
+FragTrap::~FragTrap(void)
 {
 	if (MSG == true)
-		PRINT("❌ ScavTrap Destructor!");
+		PRINT("❌ FragTrap destructor!");
 	return ;
 }
 
@@ -58,44 +55,40 @@ ScavTrap::~ScavTrap(void)
 // *OPERATORS
 // *=============================================================================
 
-ScavTrap & ScavTrap::operator = (ScavTrap const &rhs)
+
+FragTrap & FragTrap::operator = (FragTrap const &rhs)
 {
 	if (MSG == true)
-		PRINT("⚫ ScavTrap Assignment operator!")
+		PRINT("🪤 FragTrap Assignment operator!");
 	if (this != &rhs)
 		this->ClapTrap::operator = (rhs);
-	return *this;
+	return (*this);
 }
 
 // *=============================================================================
 // *MEMBER FUNCTIONS
 // *=============================================================================
 
-
-void	ScavTrap::attack(const std::string &target)
+/**
+ * @brief The FragTrap prints a message asking for a high five
+ * 
+ */
+void	FragTrap::highFivesGuy(void)
 {
-	if (!getAttacksPoints())
-	{
-		PRINT("ScavTrap " << getName() << \
-			" doesn't have any more energy!");
-		return ;
-	}
-	PRINT("ScavTrap " << getName() << " attacks " << target << \
-		", causing " << getDamage() << " points of damage!");
-	setAttacksPoints(getAttacksPoints() - 1);
+	PRINT("FragTrap requests a high five!");
 }
 
-
-void	ScavTrap::guardGate(void)
-{
-	PRINT("ScavTrap is now in guardGate mode.");
-}
-
-
-std::ostream & operator << (std::ostream &o, ScavTrap const &i)
+/**
+ * @brief Overload for the 'std::onstream <<' operator.
+ * 
+ * @param o Output stream
+ * @param i Input stream
+ * @return std::ostream& Reference to the output.
+ */
+std::ostream & operator << (std::ostream  &o, FragTrap const &i)
 {
 	o << "+---" << std::endl;
-	o << "| ScavTrap" << std::endl;
+	o << "| FragTrap" << std::endl;
 	o << "| Name: " << i.getName() << std::endl;
 	o << "| Hit Points: " << i.getHitPoints() << std::endl;
 	o << "| Energy Points: " << i.getAttacksPoints() << std::endl;

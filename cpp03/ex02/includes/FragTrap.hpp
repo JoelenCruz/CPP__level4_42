@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 19:40:46 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/21 14:50:28 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/04/21 13:50:15 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/04/21 13:50:33 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 #include "ClapTrap.hpp"
 
-class	ScavTrap : public ClapTrap
+class FragTrap : public ClapTrap
 {
 	public:
-	//* Orthodox Canonical Form methods*//
-		ScavTrap(void);
-		ScavTrap(std::string const &name);
-		ScavTrap(ScavTrap const &src);
-		~ScavTrap(void);
-		ScavTrap &operator = (ScavTrap const &rhs);
+		//* Orthodox Canonical Form methods *//
+		FragTrap(void);
+		FragTrap(std::string const &name);
+		FragTrap(FragTrap const &src);
+		~FragTrap(void);
+		FragTrap &operator = (FragTrap const &rhs);
 
-		//* Member functions *//
-		void	attack(const std::string &target);
-		void	guardGate(void);
+		//* Member Functions *//
+		void	highFivesGuy(void);
 };
 
-std::ostream & operator << (std::ostream  &o, ScavTrap const &i);
+std::ostream & operator << (std::ostream  &o, FragTrap const &i);

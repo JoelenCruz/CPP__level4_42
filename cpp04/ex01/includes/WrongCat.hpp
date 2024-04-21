@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 19:40:46 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/21 14:50:28 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/04/21 17:00:17 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/04/21 17:01:26 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "ClapTrap.hpp"
+#include "WrongAnimal.hpp"
 
-class	ScavTrap : public ClapTrap
+class WrongCat : public WrongAnimal
 {
 	public:
-	//* Orthodox Canonical Form methods*//
-		ScavTrap(void);
-		ScavTrap(std::string const &name);
-		ScavTrap(ScavTrap const &src);
-		~ScavTrap(void);
-		ScavTrap &operator = (ScavTrap const &rhs);
+		WrongCat(void);
+		WrongCat(WrongCat const &src);
+		WrongCat &operator = (WrongCat const &rhs);
+		~WrongCat(void);
 
-		//* Member functions *//
-		void	attack(const std::string &target);
-		void	guardGate(void);
+		void	makeSound(void) const;
 };
-
-std::ostream & operator << (std::ostream  &o, ScavTrap const &i);

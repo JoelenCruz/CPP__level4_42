@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 20:34:06 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/21 14:43:08 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/04/21 14:57:30 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ ScavTrap::ScavTrap(void) : ClapTrap("Default", 100, 50, 20)
 ScavTrap::ScavTrap(std::string const &name) : ClapTrap(name, 100, 50, 20)
 {
 	if (MSG == true)
-	{
-		PRINT("⚫ ScavTrap constructor with name!");
-		PRINT(name);
-	}
+		PRINT("⚫ ScavTrap constructor with name");
 	return ;
 }
 
@@ -40,17 +37,14 @@ ScavTrap::ScavTrap(std::string const &name) : ClapTrap(name, 100, 50, 20)
 ScavTrap::ScavTrap(ScavTrap const &src) : ClapTrap(src)
 {
 	if (MSG == true)
-	{
-		PRINT("⚫ ScavTrap Copy constructor!");
-		PRINT(src);
-	}
+		PRINT("⚫ ScavTrap Copy constructor called");
 	return ;
 }
 
 ScavTrap::~ScavTrap(void)
 {
 	if (MSG == true)
-		PRINT("❌ ScavTrap Destructor!");
+		PRINT("❌ ScavTrap Destructor called");
 	return ;
 }
 
@@ -61,7 +55,10 @@ ScavTrap::~ScavTrap(void)
 ScavTrap & ScavTrap::operator = (ScavTrap const &rhs)
 {
 	if (MSG == true)
-		PRINT("⚫ ScavTrap Assignment operator!")
+	{
+		PRINT("⚫ ScavTrap Assignment operator called")
+		PRINT(rhs)	
+	}
 	if (this != &rhs)
 		this->ClapTrap::operator = (rhs);
 	return *this;

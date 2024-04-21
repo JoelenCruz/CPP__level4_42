@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 19:40:46 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/21 14:50:28 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/04/21 16:59:25 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/04/21 17:18:07 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #pragma once
 
-#include "ClapTrap.hpp"
+#include <iostream>
 
-class	ScavTrap : public ClapTrap
+
+#define PRINT(x) std::cout << x << std::endl;
+
+class WrongAnimal
 {
+	protected:
+		std::string	_name;
+
 	public:
-	//* Orthodox Canonical Form methods*//
-		ScavTrap(void);
-		ScavTrap(std::string const &name);
-		ScavTrap(ScavTrap const &src);
-		~ScavTrap(void);
-		ScavTrap &operator = (ScavTrap const &rhs);
-
-		//* Member functions *//
-		void	attack(const std::string &target);
-		void	guardGate(void);
+		/* Orthodox Canonical Form methods */
+		WrongAnimal(void);
+		WrongAnimal(std::string const &name);
+		WrongAnimal(WrongAnimal const &src);
+		WrongAnimal &operator = (WrongAnimal const &rhs);
+		~WrongAnimal(void);
+		
+		/* Member Function */
+		std::string	getName(void) const;
+		void	makeSound(void) const;
 };
-
-std::ostream & operator << (std::ostream  &o, ScavTrap const &i);

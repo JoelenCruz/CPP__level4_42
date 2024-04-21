@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 16:55:46 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/14 17:20:54 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/04/21 14:39:15 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(void)
 {
     PRINT("\n---------Constructors-----------------");
 	ClapTrap	trap;
-	ClapTrap	trap1("Xmen");
+	ClapTrap	trap1("X-men");
 	ClapTrap	trap2("Justice League");
 	ClapTrap	trap3 = trap;
 	ClapTrap	trap4 = trap3 = trap1;
@@ -34,6 +34,7 @@ int	main(void)
 	{
 		trap1.attack("Justice League");
 		trap2.takeDamage(trap1.getDamage());
+        PRINT("\n");
 	}
 
     PRINT("\n------------Show ClapTraps' Status-----------");
