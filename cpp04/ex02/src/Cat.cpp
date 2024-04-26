@@ -19,7 +19,7 @@
 // *=============================================================================
 
 
-Cat::Cat(void) : Animal("Cat")
+Cat::Cat(void) : AAnimal("Cat")
 {
 	if (MSG == true)
 		PRINT("🐈 Cat: Default constructor")
@@ -27,7 +27,7 @@ Cat::Cat(void) : Animal("Cat")
 	return ;
 }
 
-Cat::Cat(Cat const &src) : Animal(src)
+Cat::Cat(Cat const &src) : AAnimal(src)
 {
 	if (MSG == true)
 		PRINT("🐈 Cat: Copy constructor!")
@@ -40,9 +40,9 @@ Cat::Cat(Cat const &src) : Animal(src)
 Cat::~Cat(void)
 {
 	if (MSG == true)
-		PRINT("❌🐈 Cat Destructor called")
+		PRINT("❌🐈 Cat Destructor called");
 	delete this->_brain;
-	return;
+	return ;
 }
 
 // *=============================================================================
@@ -67,11 +67,10 @@ Cat & Cat::operator = (Cat const &rhs)
 std::ostream &operator << (std::ostream &o, Cat const &i)
 {
 	(void)i;
-	o << "Type: " << i.getName() << std::endl;
-	o << "Brain: " << i.getBrain() << std::endl;
-	i.makeSound();
+	o << "Cat";
 	return (o);
 }
+
 // *=============================================================================
 // *MEMBER FUNCTIONS
 // *=============================================================================
@@ -82,19 +81,15 @@ void	Cat::makeSound(void) const
     PRINT("Miau! Miau! Miau Miau")
 }
 
-
-
 std::string	Cat::getIdea(size_t i) const
 {
 	return(this->_brain->getIdea(i));
 }
 
-
 void	Cat::setIdea(size_t i, std::string &idea)
 {
 	this->_brain->setIdea(i, idea);
 }
-
 
 Brain	*Cat::getBrain(void) const
 {

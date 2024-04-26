@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 
 // *==============================================================================
 // *CONSTURCTOR AND DESTRUCTOR  
@@ -18,15 +18,13 @@
 
 #define MSG true
 
-Animal::Animal(void) : _name("Undefined")
+AAnimal::AAnimal(void)
 {
-	if (MSG == true)
-		PRINT("🧬 Default constructor called");
-	return ;
+    PRINT("🧬 Animal Default constructor!");
+    return;
 }
 
-
-Animal::Animal(std::string const &name) : _name(name)
+AAnimal::AAnimal(std::string const &name) : _name(name)
 {
 	if (MSG == true)
     {
@@ -36,7 +34,7 @@ Animal::Animal(std::string const &name) : _name(name)
 	return ;
 }
 
-Animal::Animal(Animal const &src)
+AAnimal::AAnimal(AAnimal const &src)
 {
     if (MSG == true)
         PRINT("🧬 Animal Copy constructor!");
@@ -44,10 +42,9 @@ Animal::Animal(Animal const &src)
 	return ;
 }
 
-Animal::~Animal(void)
+AAnimal::~AAnimal(void)
 {
-	if (MSG == true)
-    	PRINT("Animal Destructor called");
+    PRINT("Animal Destructor called");
     return;
 }
 
@@ -55,7 +52,7 @@ Animal::~Animal(void)
 // *OPERATOR
 // *=============================================================================
 
-Animal & Animal::operator = (Animal const &rhs)
+AAnimal & AAnimal::operator = (AAnimal const &rhs)
 {
 	if (MSG == true)
 		PRINT("🧬 Assignment operator called");
@@ -64,7 +61,7 @@ Animal & Animal::operator = (Animal const &rhs)
 	return (*this);
 }
 
-std::ostream &operator << (std::ostream &o, Animal const &i)
+std::ostream &operator << (std::ostream &o, AAnimal const &i)
 {
 	(void)i;
 	o << "Animal";
@@ -76,12 +73,12 @@ std::ostream &operator << (std::ostream &o, Animal const &i)
 // *=============================================================================
 
 
-std::string	Animal::getName(void) const
+std::string	AAnimal::getName(void) const
 {
 	return (_name);
 }
 
-void	Animal::makeSound(void) const
+void	AAnimal::makeSound(void) const
 {
 	PRINT("bazinga!!!!!");
 }

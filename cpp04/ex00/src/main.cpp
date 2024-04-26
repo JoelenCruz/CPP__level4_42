@@ -68,8 +68,8 @@ void	noPointerTest(void)
 	PRINT("\nTests Without Pointers:");
 	PRINT("\e[1;3;35m\n[noPointerTest] Constructors list:\e[0m");
 	const Animal pet1 = Animal();
-	const Animal pet2 = Cat();
-	const Animal pet3 = Dog();
+	const Cat pet2 = Cat();
+	const Dog pet3 = Dog();
 	const WrongAnimal notPet1 = WrongAnimal();
 	const WrongAnimal notPet2 = WrongCat();
 	PRINT("#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-\n")
@@ -97,7 +97,7 @@ void	noPointerTest(void)
 	notPet2.makeSound();
 	PRINT("#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-\n")
 
-	PRINT("e[1;3;35m\n[noPointerTest] Destructors list:\e[0m")
+	PRINT("\e[1;3;35m\n[noPointerTest] Destructors list:\e[0m")
 	PRINT("#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-\n")
 }
 

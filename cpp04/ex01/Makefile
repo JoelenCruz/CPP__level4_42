@@ -15,7 +15,7 @@
 # *VARIABLES
 # *==============================================================================
 
-NAME		:=	Animal
+NAME		:=	Brain
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 HEADERS		:=	./includes

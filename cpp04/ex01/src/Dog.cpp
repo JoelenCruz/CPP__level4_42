@@ -18,29 +18,30 @@
 // *CONSTRUCTORS AND DESTRUCTOR
 // *=============================================================================
 
-
 Dog::Dog(void) : Animal("Dog")
 {
 	if (MSG == true)
-		PRINT("🐕 Dog: Default constructor")
+		PRINT("🐕 Default constructor called")
+	this->_brain = new Brain();
 	return ;
 }
 
 Dog::Dog(Dog const &src) : Animal(src)
 {
 	if (MSG == true)
-		PRINT("🐕 Dog: Copy constructor!")
+		PRINT("🐕 Copy constructor called")
 	this->_name = src.getName();
+	this->_brain = new Brain(*src._brain);
 	return ;
 }
-
 
 Dog::~Dog(void)
 {
 	if (MSG == true)
 		PRINT("❌🐕 Dog: Destructor called")
+	delete this->_brain;
+	return;
 }
-
 // *=============================================================================
 // *OPERATORS
 // *=============================================================================
@@ -52,14 +53,20 @@ Dog & Dog::operator = (Dog const &rhs)
 	if (MSG == true)
 		PRINT("🐕 Assignment operator!")
 	if (this != &rhs)
+	{
 		_name = rhs.getName();
+		delete this->_brain;
+		_brain = new Brain(*rhs._brain);
+	}
 	return (*this);
 }
 
 std::ostream &operator << (std::ostream &o, Dog const &i)
 {
 	(void)i;
-	o << "Dog";
+	o << "Type: " << i.getName() << std::endl;
+	o << "Brain: " << i.getBrain() << std::endl;
+	i.makeSound();
 	return (o);
 }
 

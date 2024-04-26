@@ -10,26 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
-class Dog : public Animal
+class Dog : public AAnimal
 {
 	private:
 		Brain	*_brain;
 
 	public:
-		//* Orthodox Canonical Form methods *//
+		/* Orthodox Canonical Form methods */
 		Dog(void);
 		Dog(Dog const &src);
 		Dog &operator = (Dog const &rhs);
 		virtual	~Dog(void);
 
-		//* Member Functions *//
-		void	makeSound(void) const;
+		/* Member Functions */
+		void makeSound(void) const;
 		std::string	getIdea(size_t i) const;
 		void	setIdea(size_t i, std::string &idea);
 		Brain	*getBrain(void) const;

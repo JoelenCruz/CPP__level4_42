@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 16:40:48 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/21 17:27:02 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/04/21 17:11:34 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/04/21 17:19:47 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+
+#include "WrongCat.hpp"
 
 #define MSG true
 
@@ -19,84 +20,50 @@
 // *=============================================================================
 
 
-Cat::Cat(void) : Animal("Cat")
+WrongCat::WrongCat(void) : WrongAnimal("WrongCat")
 {
 	if (MSG == true)
-		PRINT("🐈 Cat: Default constructor")
-	this->_brain = new Brain();
+		PRINT("❌🐈 WrongCat: Default constructor!");
 	return ;
 }
 
-Cat::Cat(Cat const &src) : Animal(src)
+
+WrongCat::WrongCat(WrongCat const &src) : WrongAnimal(src)
 {
 	if (MSG == true)
-		PRINT("🐈 Cat: Copy constructor!")
+		PRINT("❌🐈 WrongCat: Copy constructor with name");
 	this->_name = src.getName();
-	this->_brain = new Brain(*src._brain);
 	return ;
 }
 
 
-Cat::~Cat(void)
+WrongCat::~WrongCat(void)
 {
 	if (MSG == true)
-		PRINT("❌🐈 Cat Destructor called")
-	delete this->_brain;
-	return;
+		PRINT("❌🐈 WrongCat Destructor called");
+	return ;
 }
 
 // *=============================================================================
-// *OPERATORS
+// *OPERATORS OVERLOAD
 // *=============================================================================
 
 
-
-Cat & Cat::operator = (Cat const &rhs)
+WrongCat & WrongCat::operator = (WrongCat const &rhs)
 {
 	if (MSG == true)
-		PRINT("🐈 Assignment operator called")
+		PRINT("❌🐈 WrongCat: Assignment operator!");
 	if (this != &rhs)
-	{
 		_name = rhs.getName();
-		delete this->_brain;
-		_brain = new Brain(*rhs._brain);
-	}
 	return (*this);
 }
 
-std::ostream &operator << (std::ostream &o, Cat const &i)
-{
-	(void)i;
-	o << "Type: " << i.getName() << std::endl;
-	o << "Brain: " << i.getBrain() << std::endl;
-	i.makeSound();
-	return (o);
-}
 // *=============================================================================
 // *MEMBER FUNCTIONS
 // *=============================================================================
 
 
-void	Cat::makeSound(void) const
+void	WrongCat::makeSound(void) const
 {
-    PRINT("Miau! Miau! Miau Miau")
-}
-
-
-
-std::string	Cat::getIdea(size_t i) const
-{
-	return(this->_brain->getIdea(i));
-}
-
-
-void	Cat::setIdea(size_t i, std::string &idea)
-{
-	this->_brain->setIdea(i, idea);
-}
-
-
-Brain	*Cat::getBrain(void) const
-{
-	return (this->_brain);
+	PRINT("Not a Miau!");
 }

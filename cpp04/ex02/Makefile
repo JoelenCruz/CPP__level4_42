@@ -6,7 +6,7 @@
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 15:47:57 by jcruz-da          #+#    #+#              #
-#    Updated: 2024/04/21 13:59:18 by jcruz-da         ###   ########.fr        #
+#    Updated: 2024/04/21 17:22:25 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@
 # *VARIABLES
 # *==============================================================================
 
-NAME		:=	FragTrap
+NAME		:=	AAnimal
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 HEADERS		:=	./includes
-SRCS		:=	./src/ClapTrap.cpp ./src/ScavTrap.cpp ./src/FragTrap.cpp ./src/main.cpp 
+SRCS		:=	./src/Brain.cpp ./src/AAnimal.cpp ./src/Dog.cpp ./src/Cat.cpp ./src/WrongAnimal.cpp ./src/WrongCat.cpp ./src/main.cpp 
 OBJS		:=	$(SRCS:.cpp=.o)
 
 # *==============================================================================

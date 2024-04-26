@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 16:42:05 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/21 16:42:27 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/04/21 16:41:56 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/04/21 16:41:58 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
-class Dog : public Animal
+class Cat : public AAnimal
 {
 	private:
 		Brain	*_brain;
-
+		
 	public:
 		//* Orthodox Canonical Form methods *//
-		Dog(void);
-		Dog(Dog const &src);
-		Dog &operator = (Dog const &rhs);
-		virtual	~Dog(void);
+		Cat(void);
+		Cat(Cat const &src);
+		Cat &operator = (Cat const &rhs);
+		virtual	~Cat(void);
 
 		//* Member Functions *//
 		void	makeSound(void) const;
@@ -35,4 +32,4 @@ class Dog : public Animal
 		Brain	*getBrain(void) const;
 };
 
-std::ostream &operator << (std::ostream &o, Dog const &i);
+std::ostream &operator << (std::ostream &o, Cat const &i);

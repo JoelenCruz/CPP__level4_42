@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 16:40:48 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/21 17:27:02 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/04/21 16:43:21 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/04/21 17:27:31 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "Dog.hpp"
 
 #define MSG true
 
@@ -19,30 +19,30 @@
 // *=============================================================================
 
 
-Cat::Cat(void) : Animal("Cat")
+Dog::Dog(void) : AAnimal("Dog")
 {
 	if (MSG == true)
-		PRINT("🐈 Cat: Default constructor")
+		PRINT("🐕 Default constructor called")
 	this->_brain = new Brain();
 	return ;
 }
 
-Cat::Cat(Cat const &src) : Animal(src)
+Dog::Dog(Dog const &src) : AAnimal(src)
 {
 	if (MSG == true)
-		PRINT("🐈 Cat: Copy constructor!")
+		PRINT("🐕 Dog: Copy constructor!")
 	this->_name = src.getName();
 	this->_brain = new Brain(*src._brain);
 	return ;
 }
 
 
-Cat::~Cat(void)
+Dog::~Dog(void)
 {
 	if (MSG == true)
-		PRINT("❌🐈 Cat Destructor called")
+		PRINT("❌🐕 Dog: Destructor called");
 	delete this->_brain;
-	return;
+	return ;
 }
 
 // *=============================================================================
@@ -51,10 +51,10 @@ Cat::~Cat(void)
 
 
 
-Cat & Cat::operator = (Cat const &rhs)
+Dog & Dog::operator = (Dog const &rhs)
 {
 	if (MSG == true)
-		PRINT("🐈 Assignment operator called")
+		PRINT("🐕 Assignment operator called")
 	if (this != &rhs)
 	{
 		_name = rhs.getName();
@@ -64,7 +64,7 @@ Cat & Cat::operator = (Cat const &rhs)
 	return (*this);
 }
 
-std::ostream &operator << (std::ostream &o, Cat const &i)
+std::ostream &operator << (std::ostream &o, Dog const &i)
 {
 	(void)i;
 	o << "Type: " << i.getName() << std::endl;
@@ -72,31 +72,28 @@ std::ostream &operator << (std::ostream &o, Cat const &i)
 	i.makeSound();
 	return (o);
 }
+
 // *=============================================================================
 // *MEMBER FUNCTIONS
 // *=============================================================================
 
 
-void	Cat::makeSound(void) const
+void	Dog::makeSound(void) const
 {
-    PRINT("Miau! Miau! Miau Miau")
+    PRINT("Au! Au! Au! Au!")
 }
 
-
-
-std::string	Cat::getIdea(size_t i) const
+std::string	Dog::getIdea(size_t i) const
 {
 	return(this->_brain->getIdea(i));
 }
 
-
-void	Cat::setIdea(size_t i, std::string &idea)
+void	Dog::setIdea(size_t i, std::string &idea)
 {
 	this->_brain->setIdea(i, idea);
 }
 
-
-Brain	*Cat::getBrain(void) const
+Brain	*Dog::getBrain(void) const
 {
 	return (this->_brain);
 }

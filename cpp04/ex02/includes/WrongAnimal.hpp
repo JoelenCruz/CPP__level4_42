@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 16:42:05 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/04/21 16:42:27 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/04/21 16:59:25 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/04/21 17:18:07 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #pragma once
 
+#include <iostream>
 
-#include "Animal.hpp"
-#include "Brain.hpp"
 
-class Dog : public Animal
+#define PRINT(x) std::cout << x << std::endl;
+
+class WrongAnimal
 {
-	private:
-		Brain	*_brain;
+	protected:
+		std::string	_name;
 
 	public:
-		//* Orthodox Canonical Form methods *//
-		Dog(void);
-		Dog(Dog const &src);
-		Dog &operator = (Dog const &rhs);
-		virtual	~Dog(void);
-
-		//* Member Functions *//
+		/* Orthodox Canonical Form methods */
+		WrongAnimal(void);
+		WrongAnimal(std::string const &name);
+		WrongAnimal(WrongAnimal const &src);
+		WrongAnimal &operator = (WrongAnimal const &rhs);
+		~WrongAnimal(void);
+		
+		/* Member Function */
+		std::string	getName(void) const;
 		void	makeSound(void) const;
-		std::string	getIdea(size_t i) const;
-		void	setIdea(size_t i, std::string &idea);
-		Brain	*getBrain(void) const;
 };
-
-std::ostream &operator << (std::ostream &o, Dog const &i);
