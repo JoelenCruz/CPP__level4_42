@@ -6,7 +6,7 @@
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:59:06 by joe               #+#    #+#             */
-/*   Updated: 2024/06/25 19:35:26 by joe              ###   ########.fr       */
+/*   Updated: 2024/06/29 15:03:41 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ int runTest(int choice)
             try {
                 Bureaucrat b1;
                 Bureaucrat b2("Lula da Silva", 45);
-                
-                std::cout << b1;
-                std::cout << b2;
-                
                 Bureaucrat b3("Jair Bolsonaro", 0);
                 
             } catch (Bureaucrat::GradeTooHighException & e) {
@@ -66,11 +62,13 @@ int runTest(int choice)
             PRINT_COLOR(YELLOW, "<---Test 4: decrement too much a Bureaucrat--->");
             try {
                 Bureaucrat b1("Jair Bolsonaro", 149);
-                std::cout << b1;
-                b1.decrementGrade();
-                std::cout << b1;
-                b1.decrementGrade();
-                std::cout << b1;
+                Bureaucrat b2 = b1;
+                
+                std::cout << b2;
+                b2.decrementGrade();
+                std::cout << b2;
+                b2.decrementGrade();
+                std::cout << b2;
 
             } catch (Bureaucrat::GradeTooHighException & e) {
                 std::cout << e.what() << std::endl;

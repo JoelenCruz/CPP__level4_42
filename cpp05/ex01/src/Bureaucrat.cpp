@@ -6,7 +6,7 @@
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:20:53 by joe               #+#    #+#             */
-/*   Updated: 2024/06/29 15:04:28 by joe              ###   ########.fr       */
+/*   Updated: 2024/06/29 16:45:58 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ std::ostream &operator << (std::ostream &o, Bureaucrat const &i)
 	(void)i;
 	o << std::endl;
 	o << "================> Name: " << i.getName() << std::endl;
-	o << "================> Grade: " << i.getGrade() << std::endl << std::endl;
+	o << "================> Grade: " << i.getGrade() << std::endl;
 	return (o);
 }
 
@@ -127,4 +127,23 @@ void	Bureaucrat::incrementGrade(void)
 	if (this->getGrade() == MIN_GRADE)
 		throw Bureaucrat::GradeTooHighException();
 	this->_grade--;
+}
+
+
+void Bureaucrat::signForm(Form &form)
+{
+	if (form.getSigned())
+		return ;
+		
+	try
+	{
+		form.beSigned(*this);
+		PRINT_COLOR(YELLOW, this->getName());
+		PRINT_COLOR(YELLOW,"SIGNED");
+		PRINT_COLOR(YELLOW, form.getName());
+	}
+	catch(Form::GradeTooLowException &e)
+	{
+		ERROR(this->getName() << " couldn't sign " << form.getName() << " because " << "\n" << e.what() << "." );
+	}
 }

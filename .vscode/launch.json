@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/home/joe/Documents/42_porto/CPP__level4_42/cpp05/ex00/src",
-      "program": "/home/joe/Documents/42_porto/CPP__level4_42/cpp05/ex00/src/build/Debug/outDebug",
+      "program": "/home/joe/Documents/42_porto/CPP__level4_42/cpp05/ex00/src/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

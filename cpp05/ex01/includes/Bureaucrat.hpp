@@ -6,13 +6,15 @@
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:04:41 by joe               #+#    #+#             */
-/*   Updated: 2024/06/29 14:27:04 by joe              ###   ########.fr       */
+/*   Updated: 2024/06/29 16:15:58 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+
+#include "Form.hpp"
 
 #define RESET_COLOR "\033[0m"
 #define YELLOW "\033[33m"
@@ -31,6 +33,8 @@
 // =============================================================================
 // CLASS
 // =============================================================================
+
+class Form;
 
 class Bureaucrat
 {
@@ -51,6 +55,8 @@ class Bureaucrat
 		std::string		getName(void) const;
 		void			decrementGrade(void);
 		void			incrementGrade(void);
+		void			signForm(Form &form);
+
 		
 		class	GradeTooHighException : public std::exception
 		{

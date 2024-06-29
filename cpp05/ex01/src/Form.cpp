@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:20:53 by joe               #+#    #+#             */
-/*   Updated: 2024/06/29 15:04:28 by joe              ###   ########.fr       */
+/*   Updated: 2024/06/29 17:03:30 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Bureaucrat.hpp"
+#include "../includes/Form.hpp"
 
 
 // =============================================================================
 // EXCPTIONS
 // =============================================================================
 
-const char	*Bureaucrat::GradeTooHighException::what(void) const throw()
+const char	*Form::GradeTooHighException::what(void) const throw()
 {
 	PRINT_COLOR(YELLOW,"⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️");
-	PRINT_COLOR(YELLOW,"Exception: Bureaucrat's grade is too high!");
+	PRINT_COLOR(YELLOW,"Exception: Form's grade is too high!");
     PRINT_COLOR(YELLOW,"⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️");
 
 	return "";
 }
 
-const char	*Bureaucrat::GradeTooLowException::what(void) const throw()
+const char	*Form::GradeTooLowException::what(void) const throw()
 {
 	PRINT_COLOR(YELLOW,"⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️");
-	PRINT_COLOR(YELLOW,"Exception: Bureaucrat's grade is too low!");
+	PRINT_COLOR(YELLOW,"Exception: Form's grade is too low!");
     PRINT_COLOR(YELLOW,"⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️");
 
 	return "";
@@ -40,60 +40,73 @@ const char	*Bureaucrat::GradeTooLowException::what(void) const throw()
 // =============================================================================
 
 
-Bureaucrat::Bureaucrat(): _name("Some bureaucrat"), _grade(MAX_GRADE)
+Form::Form(): _name("Some form"), _signed(false), _gradeSign(MAX_GRADE), _gradeExecute(MAX_GRADE)
 {
-	PRINT_COLOR(BLUE, "👔 Default Bureaucrat constructor!");
+	PRINT_COLOR(BLUE, "📝 Default Form constructor!");
 	PRINT_COLOR(BLUE, _name);
 }
 
 
-Bureaucrat::Bureaucrat(std::string const &name, int grade): _name(name)
+Form::Form(std::string const &name, int const &gradeSign, int const &gradeExecute): 
+		
+		_name(name), 
+		_signed (false),
+		_gradeSign(gradeSign),
+		_gradeExecute(gradeExecute)
+		
 {
-	if (grade < MIN_GRADE)
-		throw	Bureaucrat::GradeTooHighException();
-	else if (grade > MAX_GRADE)
-		throw	Bureaucrat::GradeTooLowException();
-	this->_grade = grade;
-	PRINT_COLOR(BLUE, "👔 Parameter Bureaucrat constructor!");
+	if (gradeSign < MIN_GRADE || gradeExecute < MIN_GRADE )
+		throw	Form::GradeTooHighException();
+	if (gradeExecute > MAX_GRADE || gradeSign > MAX_GRADE)
+		throw	Form::GradeTooLowException();
+		
+	PRINT_COLOR(BLUE, "📝 Parameter Form constructor!");
     PRINT_COLOR(BLUE, name);
+	
 }
 
 
-Bureaucrat::Bureaucrat(Bureaucrat const &src)
+Form::Form(Form const &src): 
+		_name(src.getName()), 
+		_signed(src.getSigned()),
+		_gradeSign(src.getGradeSign()), 
+		_gradeExecute(src.getGradeExec())
 {
-	PRINT_COLOR(BLUE, "👔 Copy Constructor called");
-	*this = src;
+	PRINT_COLOR(BLUE, "📝 Copy Constructor called");
 }
 
 
-Bureaucrat::~Bureaucrat(void)
+Form::~Form(void)
 {
-	PRINT_COLOR(RED , "👔  Destructor called");
+	PRINT_COLOR(RED , "📝  Destructor called");
 }
 
 // =============================================================================
 // OPERATOR OVERLOAD
 // =============================================================================
 
-
-Bureaucrat & Bureaucrat::operator = (Bureaucrat const &rhs)
+Form & Form::operator = (Form const &rhs)
 {
 	PRINT_COLOR(BLUE, "⚙️ Assignment operator called")
 	if (this != &rhs)
 	{
 		const_cast<std::string &>(this->_name) = rhs.getName();
-		this->_grade = rhs.getGrade();
+		this->_signed = rhs.getSigned();
+		const_cast<int &>(this->_gradeSign) = rhs.getGradeSign();
+		const_cast<int &>(this->_gradeExecute) = rhs.getGradeExec();
 	}
 	return (*this);
 }
 
 
-std::ostream &operator << (std::ostream &o, Bureaucrat const &i)
+std::ostream &operator << (std::ostream &o, Form const &i)
 {
 	(void)i;
 	o << std::endl;
-	o << "================> Name: " << i.getName() << std::endl;
-	o << "================> Grade: " << i.getGrade() << std::endl << std::endl;
+	o << "================> Form name: " << i.getName() << std::endl;
+	o << "================> Signed: " << (i.getSigned() ? "True" : "False") << std::endl;
+	o << "================> Grade required to execute: " << i.getGradeExec() << std::endl;
+	o << "================> Grade required to sign: " << i.getGradeSign() << std::endl;
 	return (o);
 }
 
@@ -101,30 +114,32 @@ std::ostream &operator << (std::ostream &o, Bureaucrat const &i)
 // MEMBER FUNCTIONS
 // =============================================================================
 
-
-int	Bureaucrat::getGrade(void) const
-{
-	return (this->_grade);
-}
-
-
-std::string	Bureaucrat::getName(void) const
+std::string	Form::getName(void) const
 {
 	return (this->_name);
 }
 
 
-void	Bureaucrat::decrementGrade(void)
+bool	Form::getSigned(void) const
 {
-	if (this->getGrade() == MAX_GRADE)
-		throw Bureaucrat::GradeTooLowException();
-	this->_grade++;
+	return (this->_signed);
+}
+
+int	Form::getGradeSign(void) const
+{
+	return (this->_gradeSign);
+}
+
+int	Form::getGradeExec(void) const
+{
+	return (this->_gradeExecute);
 }
 
 
-void	Bureaucrat::incrementGrade(void)
+void	Form::beSigned(Bureaucrat &bureaucrat)
 {
-	if (this->getGrade() == MIN_GRADE)
-		throw Bureaucrat::GradeTooHighException();
-	this->_grade--;
+	if (bureaucrat.getGrade() > this->getGradeSign())
+		throw Form::GradeTooLowException();
+	else
+		this->_signed = true;
 }
