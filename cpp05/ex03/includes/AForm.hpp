@@ -79,6 +79,19 @@ class AForm
 			public:
 				const char *what(void) const throw();
 		};
+		class	FormDoesntExist : public std::exception
+		{
+			public:
+				const char *what(void) const throw();
+		};
 };
 
 std::ostream &operator << (std::ostream &o, AForm const &i);
+
+typedef AForm*	(*t_form)(std::string const &target);
+
+struct	s_form
+{
+	std::string	name;
+	t_form		form;
+};

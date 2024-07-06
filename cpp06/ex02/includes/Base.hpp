@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 13:04:52 by joe               #+#    #+#             */
-/*   Updated: 2024/06/30 14:11:07 by joe              ###   ########.fr       */
+/*   Created: 2024/06/24 14:04:41 by joe               #+#    #+#             */
+/*   Updated: 2024/06/29 14:27:04 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "AForm.hpp"
-
+#include <iostream>	//std::time();
 #include <cstdlib>	//std::rand(); std::srand()
 #include <ctime>	//std::time();
 
-#define RRF_SIGN_GRADE 72
-#define RRF_EXEC_GRADE 45
 
+#define RESET_COLOR "\033[0m"
+#define YELLOW "\033[33m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define BLUE "\033[34m"
+#define PINK "\033[35m"
 
-class RobotomyRequestForm : public AForm
+#define PRINT_COLOR(color, message) std::cout << color << message << RESET_COLOR << std::endl;
+
+// =============================================================================
+// CLASS
+// =============================================================================
+
+class  Base
 {
 	public:
-		/* Orthodox Canonical Form Methods */
-		RobotomyRequestForm(void);
-		RobotomyRequestForm(RobotomyRequestForm const &src);
-		RobotomyRequestForm(std::string const &target);
-		RobotomyRequestForm &operator = (RobotomyRequestForm const &rhs);
-		~RobotomyRequestForm(void);
-
-		/* Member Function */
-		void	execute(Bureaucrat const &executor) const;
+		virtual~Base(void);
 };

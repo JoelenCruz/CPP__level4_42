@@ -67,4 +67,5 @@ class ShrubberyCreationForm : public AForm
 
 		/* Member Functions */
 		void	execute(Bureaucrat const &executor) const;
+		static AForm	*create(std::string const &target);
 };

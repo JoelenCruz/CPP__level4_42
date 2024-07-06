@@ -33,4 +33,5 @@ class RobotomyRequestForm : public AForm
 
 		/* Member Function */
 		void	execute(Bureaucrat const &executor) const;
+		static AForm	*create(std::string const &target);
 };

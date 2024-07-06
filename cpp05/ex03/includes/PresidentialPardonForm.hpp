@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 13:04:52 by joe               #+#    #+#             */
-/*   Updated: 2024/06/30 14:11:07 by joe              ###   ########.fr       */
+/*   Created: 2024/06/30 13:03:46 by joe               #+#    #+#             */
+/*   Updated: 2024/06/30 13:17:02 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 #include "AForm.hpp"
 
-#include <cstdlib>	//std::rand(); std::srand()
-#include <ctime>	//std::time();
-
-#define RRF_SIGN_GRADE 72
-#define RRF_EXEC_GRADE 45
+#define PPF_SIGN 25
+#define PPF_EXEC 5
 
 
-class RobotomyRequestForm : public AForm
+class PresidentialPardonForm : public AForm
 {
 	public:
 		/* Orthodox Canonical Form Methods */
-		RobotomyRequestForm(void);
-		RobotomyRequestForm(RobotomyRequestForm const &src);
-		RobotomyRequestForm(std::string const &target);
-		RobotomyRequestForm &operator = (RobotomyRequestForm const &rhs);
-		~RobotomyRequestForm(void);
+		PresidentialPardonForm(void);
+		PresidentialPardonForm(PresidentialPardonForm const &src);
+		PresidentialPardonForm(std::string const &target);
+		PresidentialPardonForm &operator = (PresidentialPardonForm const &rhs);
+		~PresidentialPardonForm(void);
 
-		/* Member Function */
+		/* Member Functions */
 		void	execute(Bureaucrat const &executor) const;
+		static AForm	*create(std::string const &target);
 };

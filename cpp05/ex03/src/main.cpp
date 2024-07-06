@@ -13,18 +13,26 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int runTest(int choice) 
 {
-        Bureaucrat ceo("Elon musk", 1);
+       Bureaucrat	ceo("CEO", 1);
+
+        AForm* presidentialForm;
+        AForm* robotomyForm;
+        AForm* shrubberyForm;
+        AForm* wrongForm;
+        Intern randomIntern;
+
         if (choice == 1) 
         {
-            PRINT_COLOR(YELLOW, "<-------Test 1: bureaucrat CEO instanciated to sign the forms: -------->");
+            PRINT_COLOR(YELLOW, "<-------Test 1: Presidential Form -------->");
             try {
-                    Bureaucrat	bureaucrat("Chico Buarque", 137);
-                    ShrubberyCreationForm	form("Consturção");
-                    ceo.signForm(form);
-                    bureaucrat.executeForm(form);
+                    presidentialForm = randomIntern.makeForm("presidential pardon", "Robert");
+                    ceo.signForm(*presidentialForm);
+                    ceo.executeForm(*presidentialForm);
+                    delete presidentialForm;
 		
                  } catch (std::exception & e) {
                 std::cout << e.what() << std::endl;
@@ -32,13 +40,14 @@ int runTest(int choice)
         }
         else if (choice == 2) 
         {
-            PRINT_COLOR(YELLOW, "<-------bureaucrat can NOT execute the form (Grade Too Low)-------------->");
+            PRINT_COLOR(YELLOW, "<-------Robotomy Form Test-------------->");
             try {
                 
-                Bureaucrat	bureaucrat("Clarice Falção", 148);
-                PresidentialPardonForm	form("Oitavo andar");
-                ceo.signForm(form);
-                bureaucrat.executeForm(form);
+                robotomyForm = randomIntern.makeForm("robotomy request", "Marvin");
+                ceo.signForm(*robotomyForm);
+                ceo.executeForm(*robotomyForm);
+
+                delete robotomyForm;
                 
              } catch (std::exception & e) {
                 std::cout << e.what() << std::endl;
@@ -46,12 +55,13 @@ int runTest(int choice)
         }
         else if (choice == 3)  
         {
-            PRINT_COLOR(YELLOW, "<----------Test 3: bureaucrat can NOT execute the form (Form Not Signed)------------------->");
+            PRINT_COLOR(YELLOW, "<----------Shrubbery Form Test------------------->");
             try {
-                Bureaucrat	bureaucrat("Los Hermanos", 100);
-                ShrubberyCreationForm	form("Ana Julia");
-                //ceo.signForm(form);
-                bureaucrat.executeForm(form);
+               shrubberyForm = randomIntern.makeForm("shrubbery creation", "Beach");
+                ceo.signForm(*shrubberyForm);
+                ceo.executeForm(*shrubberyForm);
+
+                delete shrubberyForm;
                 
             } catch (std::exception & e) {
                 std::cout << e.what() << std::endl;
@@ -59,12 +69,10 @@ int runTest(int choice)
         }
         else if (choice == 4)  
         {
-            PRINT_COLOR(YELLOW, "<----------Test 3: ROBOTOMY REQUEST FORM TEST------------------->");
+            PRINT_COLOR(YELLOW, "<---------- Wrong Form Test ------------------->");
             try {
-                Bureaucrat	bureaucrat("Edimilson Rodrigues", 40);
-                RobotomyRequestForm	form("Robocopy");
-                ceo.signForm(form);
-                bureaucrat.executeForm(form);
+               wrongForm = randomIntern.makeForm("test form", "abcd-e");
+               delete wrongForm;
                 
              } catch (std::exception & e) {
                 std::cout << e.what() << std::endl;
@@ -85,10 +93,10 @@ int menu()
 
     PRINT_COLOR(PINK, "-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#--#-#-#-#-#");
     PRINT_COLOR(PINK, "Escolha um teste para rodar:");
-    PRINT_COLOR(PINK, "[1] Teste 1: bureaucrat can sing the form");
-    PRINT_COLOR(PINK, "[2] Teste 2: bureaucrat can not sing the form");
-    PRINT_COLOR(PINK, "[3] Teste 3: form can not be instanciated");
-    PRINT_COLOR(PINK, "[4] Teste 4: ROBOTOMY tests");
+    PRINT_COLOR(PINK, "[1] Teste 1: Presidential Form");
+    PRINT_COLOR(PINK, "[2] Teste 2: Robotomy Form");
+    PRINT_COLOR(PINK, "[3] Teste 3: Shrubbery Form");
+    PRINT_COLOR(PINK, "[4] Teste 4: Wrong Form");
     PRINT_COLOR(PINK, "[0] End programa");
     PRINT_COLOR(PINK, "-#-#-#-#-#--#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#");
 
