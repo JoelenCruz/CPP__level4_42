@@ -6,19 +6,17 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:21:23 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/07 14:04:21 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:45:36 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
 
 #include <iostream>	// std::cout, std::cerr
 #include <cmath>	// std::isnan, std::isinf
 #include <cstdlib>	// std::atoi
 #include <limits>	// std::numeric_limits
 #include <iomanip>	// std::setprecision
-
 
 
 #define RESET_COLOR "\033[0m"
@@ -37,11 +35,11 @@ typedef std::numeric_limits<float> LimitsFloat;
 
 enum e_type
 {
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE,
-	INVALID,
+	CHAR = 0,
+	INT = 1,
+	FLOAT = 2,
+	DOUBLE = 3,
+	INVALID = 4,
 };
 
 // =============================================================================
@@ -88,6 +86,7 @@ class ScalarConverter
 		
 		/* Impossible conversion */
 		static void	impossible_conversion(void);
+		
 
 	public:
 		static void	convert(const std::string str);

@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/24 14:02:30 by joe               #+#    #+#              #
-#    Updated: 2024/07/08 20:44:07 by jcruz-da         ###   ########.fr        #
+#    Created: 2024/07/07 12:58:02 by jcruz-da          #+#    #+#              #
+#    Updated: 2024/07/11 22:39:06 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@
 # *VARIABLES
 # *==============================================================================
 
-NAME		:=	Base
+NAME		:=	easyfind
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98 -fsanitize=address
 HEADERS		:=	./includes
-SRCS		:=	./src/Base.cpp ./src/main.cpp 
+SRCS		:=	./src/main.cpp 
 OBJS		:=	$(SRCS:.cpp=.o)
 
 # *==============================================================================

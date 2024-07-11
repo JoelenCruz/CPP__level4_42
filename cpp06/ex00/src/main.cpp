@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:59:23 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/07 14:44:21 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:09:22 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,26 @@ int main()
 {
     int choice = -1;
     
-    while (choice != 0) {
+    while (choice != 0) 
+	{
         choice = menu();
-        if (choice == 1) {
+
+        if (choice == 1) 
             subject_tests();
-        } else if (choice == 2) {
+		else if (choice == 2) 
+		{
             std::string input;
-            PRINT_COLOR(PINK, "Digite um valor para converter: ");
+            PRINT_COLOR(PINK, "Enter a value to convert: ");
             std::cin >> input;
             ScalarConverter::convert(input);
-        } else if (choice == 0) {
-            std::cout << "End prog..." << std::endl;
-        } else {
-            std::cout << "Escolha inválida. Por favor, digite 0, 1, ou 2." << std::endl;
+        } 
+		else if (choice == 0)
+		{
+           PRINT_COLOR(RED, "End prog...");
+        } 
+		else 
+		{
+           PRINT_COLOR(RED, "Invalid choice. ");
         }
     }
     return 0;

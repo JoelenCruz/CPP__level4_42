@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:23:01 by harndt            #+#    #+#             */
-/*   Updated: 2024/07/07 14:48:11 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:03:02 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 const char * ScalarConverter::UnknownTypeException::what() const throw()
 {
-	return "\033[0;31mUnknownTypeException: Type not supported!\n\033[0m";
+	PRINT_COLOR(RED, "Type not supported!!");
+	 return"";
 }
 
 
@@ -56,7 +57,7 @@ ScalarConverter & ScalarConverter::operator = (ScalarConverter const &rhs)
 }
 
 // =============================================================================
-// Get type functions
+// functions
 // =============================================================================
 
 
@@ -73,10 +74,12 @@ int		ScalarConverter::is_infinity(const std::string &str)
 bool	ScalarConverter::is_all_digits(const std::string &str, int type)
 {
 	unsigned int	i = 0;
+	unsigned int	points = 0;
+	unsigned int	f = 0;
 
 	if (str[0] == '+' || str[0] == '-')
 		i++;
-	if (type == 1)
+	if (type == INT)
 	{
 		while (i < str.length())
 		{
@@ -84,11 +87,17 @@ bool	ScalarConverter::is_all_digits(const std::string &str, int type)
 				return (false);
 		}
 	}
-	else if (type == 2)
+	else if (type == FLOAT)
 	{
 		while (i < str.length())
 		{
+			if (str[i] == '.')
+				points++;
+			if (str[i] == 'f')
+				f++;
 			if (!isdigit(str[i]) && str[i] != '.' && str[i] != 'f')
+				return (false);
+			if (points == 2 || f == 2)
 				return (false);
 			i++;
 		}
@@ -114,16 +123,15 @@ bool	ScalarConverter::is_int(const std::string &str)
 	return (false);
 }
 
-
 bool	ScalarConverter::is_float(const std::string &str)
 {
 	size_t dlength = str.length() - 1;
 
-	if (str.at(dlength) != 'f')
+	if (str[dlength] != 'f')
 		return (false);
 	if (is_infinity(str) == FLOAT)
 		return (true);
-	if (is_all_digits(str, 2) && str.find('.') <= 16)
+	if (is_all_digits(str, FLOAT) && str.find('.') <= 16)
 		return (true);
 	return (false);
 }
@@ -259,15 +267,11 @@ void	ScalarConverter::print_char(char c)
 	}
 	else
 	{
-		PRINT_COLOR(BLUE, "char: Non displayable");
+		PRINT_COLOR(RED, "char: Non displayable");
 	}
 }
 
-/**
- * @brief Prints an int.
- * 
- * @param d The int to be printed.
- */
+
 void	ScalarConverter::print_int(int d)
 {
 	PRINT_COLOR(BLUE, "int: " << d);
@@ -288,18 +292,17 @@ void	ScalarConverter::print_double(double d)
 
 void	ScalarConverter::print_impossible(const std::string type)
 {
-	PRINT_COLOR(BLUE,type << " impossible!"); 
+	PRINT_COLOR(RED,type << " impossible!"); 
 }
 
 
 void	ScalarConverter::impossible_conversion(void)
-{
+{	
 	print_impossible("char");
 	print_impossible("int");
 	print_impossible("float");
 	print_impossible("double");
 }
-
 // =============================================================================
 // Convert function
 // =============================================================================

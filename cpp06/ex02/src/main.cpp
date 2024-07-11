@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:59:06 by joe               #+#    #+#             */
-/*   Updated: 2024/06/29 15:03:41 by joe              ###   ########.fr       */
+/*   Updated: 2024/07/09 19:27:07 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,21 @@
 Base	*generate(void)
 {
 	Base	*random;
+	std::srand(std::time(0)); 
 	int		type = std::rand() % 3;
 	
 	switch (type)
 	{
+		
 		case 0 : random = new A; break;
-		case 1 : random = new B; break;
-		case 2 : random = new C; break;
+		case 1 : random = new C; break;
+		case 2 : random = new B; break;
 	}
+	PRINT_COLOR(RED, type);
 	return (random);
 }
 
-/**
- * @brief Prints the actual type of the object pointed to by p: "A", "B" or "C"
- * 
- * @param p the Base pointer to check.
- */
+
 void	identify(Base *p)
 {
 	if (dynamic_cast<A *>(p))
@@ -54,11 +53,7 @@ void	identify(Base *p)
 	}
 }
 
-/**
- * @brief Prints the actual type of the object referenced by p: "A", "B" or "C"
- * 
- * @param p the Base reference to check.
- */
+
 void	identify(Base &p)
 {
 	try {
@@ -79,16 +74,15 @@ void	identify(Base &p)
 
 int	main(void)
 {
-	PRINT_COLOR(YELLOW, "TEST 01: Passing a random class (A, B or C)")
+	PRINT_COLOR(YELLOW, "--------------TEST 01: Passing a random class (A, B or C)-------------")
 	Base * test_01 = generate();
-	std::cout << "Identify by pointer: ";
 	identify(test_01);
 	std::cout << "Identify by reference: ";
 	identify(*test_01);
 	std::cout << "\n";
 	delete test_01;
 
-	PRINT_COLOR(YELLOW, "TEST 02: Error handling (passing the Base class)")
+	PRINT_COLOR(YELLOW, "--------------TEST 02: Error handling (passing the Base class)---------")
 	Base test_02;
 	std::cout << "Identify by pointer: ";
 	identify(&test_02);
