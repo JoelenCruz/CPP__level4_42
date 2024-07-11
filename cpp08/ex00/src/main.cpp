@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:59:23 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/11 22:55:58 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/11 23:29:08 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main()
     std::list<int> numbers_list;
     std::deque<int> numbers_deque;
 
-    for (int i = 1; i <= 100; ++i) {
+    for (int i = 1; i <= 6; ++i) {
         numbers_vector.push_back(i);
         numbers_list.push_back(i);
         numbers_deque.push_back(i);
