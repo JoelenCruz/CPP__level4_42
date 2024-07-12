@@ -6,17 +6,19 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:04:41 by joe               #+#    #+#             */
-/*   Updated: 2024/07/12 00:15:29 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:25:45 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-# include <iostream>
-# include <string>
-#include <vector>
-typedef std::vector<int>	intv;
-
+#include <iostream>		
+#include <algorithm>	
+#include <vector>			
+#include <climits> 		
+#include <ctime> 	
+ 
+typedef std::vector<int>	int_vector;
 
 #define RESET_COLOR "\033[0m"
 #define YELLOW "\033[33m"
@@ -36,18 +38,20 @@ class Span
 {
 	private:
 		unsigned int _maxSize;
-		std::vector<int> _numbers;
+		int_vector _numbers;
 
 	public:
-		/* Orthodox Canonical Form methods */
+		/* Orthodox Canonical methods */
 		Span();
 		Span(unsigned int);
 		Span(Span const &src);
 		~Span();
 		Span &operator = (Span const &rhs);
 
-		void populateSpan(intv::iterator begin, intv::iterator end);
+		int_vector const		&getRange(void) const;
+		void populateSpan(int_vector::iterator begin, int_vector::iterator end);
 		void addNumber(int number);
+		void addNumber(int_vector::iterator begin, int_vector::iterator end);
 		unsigned int shortestSpan(void);
 		unsigned int longestSpan(void);
 

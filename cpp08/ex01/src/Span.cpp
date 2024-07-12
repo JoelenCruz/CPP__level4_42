@@ -6,12 +6,11 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 23:47:58 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/12 00:27:24 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:07:06 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Span.hpp"
-#include <algorithm>
+#include "../includes/Span.hpp"
 
 
 // =============================================================================
@@ -67,6 +66,12 @@ Span &Span::operator = (Span const &rhs)
 	return (*this);
 }
 
+
+
+// =============================================================================
+// FUNCTIONS
+// =============================================================================
+
 void Span::addNumber(int number) 
 {
     if (_numbers.size() >= _maxSize) 
@@ -76,16 +81,16 @@ void Span::addNumber(int number)
     _numbers.push_back(number);
 }
 
-void Span::populateSpan(intv::iterator begin, intv::iterator end) {
-    while (begin != end) {
-        if (_numbers.size() >= _maxSize) {
-            throw SpanIsFullException();
-        }
-        _numbers.push_back(*begin);
-        ++begin;
-    }
+void	Span::addNumber(int_vector::iterator begin, int_vector::iterator end)
+{
+	while (begin != end)
+	{
+		if (this->_numbers.size() == this->_maxSize)
+			throw (Span::SpanIsFullException());
+		this->_numbers.push_back(*begin);
+		begin++;
+	}
 }
-
 unsigned int Span::longestSpan(void) 
 {
     if (_numbers.size() < 2) {
@@ -96,22 +101,22 @@ unsigned int Span::longestSpan(void)
     return static_cast<unsigned int>(sortedNumbers.back() - sortedNumbers.front());
 }
 
-unsigned int	Span::shortestSpan(void)
-{	
-	if (this->_numbers.size() < 2)
-		NotEnoughNumbersException();
+unsigned int Span::shortestSpan(void)
+{
+    if (_numbers.size() < 2)
+        throw Span::NotEnoughNumbersException();
 
-	intv	sorted(this->_numbers);
-	std::sort(sorted.begin(), sorted.end());
-	int	previous = sorted.front();
-	intv::iterator	it = sorted.begin();
-	it++;
-	int	span = *it - previous;
-	for (; it != sorted.end(); it++)
-	{
-		if (*it - previous < span)
-			span = *it - previous;
-		previous = *it;
-	}
-	return (span);
+    std::vector<int> sorted(_numbers);
+    std::sort(sorted.begin(), sorted.end());
+
+    unsigned int min_distance = INT_MAX;
+    for (size_t i = 1; i < sorted.size(); i++)
+    {
+        unsigned int current_distance = sorted[i] - sorted[i - 1];
+        if (current_distance < min_distance)
+            min_distance = current_distance;
+    }
+    return min_distance;
 }
+
+
