@@ -5,42 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 15:59:06 by joe               #+#    #+#             */
-/*   Updated: 2024/07/13 16:32:27 by jcruz-da         ###   ########.fr       */
+/*   Created: 2024/07/07 13:59:23 by jcruz-da          #+#    #+#             */
+/*   Updated: 2024/07/13 23:33:19 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/MutantStack.hpp"
-#include <iostream>
 
-int main()
+#include "../includes/BitcoinExchange.hpp"
+
+
+int main(int argc, char **argv)
 {
-	MutantStack<int> mstack;
-
-	mstack.push(5);
-	mstack.push(17);
-
-	std::cout << "top: " << mstack.top() << std::endl;
-
-	mstack.pop();
-
-	std::cout << "size: " << mstack.size() << std::endl;
-
-	mstack.push(3);
-	mstack.push(5);
-	mstack.push(737);
-	mstack.push(0);
-
-	MutantStack<int>::iterator it = mstack.begin();
-	MutantStack<int>::iterator ite = mstack.end();
-
-	++it;
-	--it;
-	while (it != ite)
-	{
-		std::cout << *it << std::endl;
-		++it;
-	}
-	std::stack<int> s(mstack);
-	return 0;
+    if (argc != 2)
+    {
+        PRINT_COLOR(RED, "Error: could not open file.");
+        PRINT_COLOR(GREEN, "Usage: ./btc input.txt");
+        return 1;
+    }
+    else
+    {
+        BitcoinExchange btc;
+        btc.superCompare(argv[1]);
+        btc.printData();
+    }
+    return 0;
 }
