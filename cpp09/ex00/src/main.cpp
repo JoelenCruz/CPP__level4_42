@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:59:23 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/13 23:33:19 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:10:16 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int main(int argc, char **argv)
     else
     {
         BitcoinExchange btc;
+        btc.checkHead(argv[1]);
         btc.superCompare(argv[1]);
-        btc.printData();
+            
     }
     return 0;
 }

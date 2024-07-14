@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 22:31:51 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/14 01:06:19 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:29:24 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ class BitcoinExchange
 	private:
 		std::map<std::string, double> _map;
 
+		/*Auxiliar Functions*/
 		void CreatMap(void);
 		double getBottomDate(const std::string& targetDate) const;
 		bool isValidDate(std::string date) const;
+		bool isValidValue(double value) const;
 		std::string getData(std::string line) const;
 		double getValue(std::string line) const;
 		
@@ -50,9 +52,11 @@ class BitcoinExchange
 		BitcoinExchange(const BitcoinExchange& a);
 		BitcoinExchange& operator=(const BitcoinExchange& a);
 
-
+		/*Main Functions*/
 		void printData();
 		void superCompare(std::string search) const;
+		bool checkHead(std::string filename) const;
+
 		
 		class	InvalidDateExpetion : public std::exception
 		{
@@ -96,12 +100,12 @@ class BitcoinExchange
 			const char* what() const throw();
 		};
 
-		class	NotAPositiveNumberException : public std::exception
+		class	InvalidHeadExpetion : public std::exception
 		{
 			public:
 			const char* what() const throw();
 		};
-		class	TooLargeNumberException : public std::exception
+		class	InvalidNumberExpetion : public std::exception
 		{
 			public:
 			const char* what() const throw();

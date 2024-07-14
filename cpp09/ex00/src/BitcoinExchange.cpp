@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 19:24:23 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/14 01:09:19 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/14 15:36:47 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,22 @@
 // Exceptions
 // =============================================================================
 
+const char *BitcoinExchange::InvalidHeadExpetion::what() const throw()
+{
+    PRINT_COLOR(RED, "Invalid head format, should be 'Date | Value'");
+    return ("");
+}
+
+
 const char *BitcoinExchange::InvalidDateExpetion::what() const throw()
 {
-    PRINT_COLOR(RED, "Invalid date format, should be YYYY-MM-DD");
+    PRINT_COLOR(RED, "Invalid date format, should be 'YYYY-MM-DD'");
     return ("");
 }
 
 const char *BitcoinExchange::YearInvalidExpetion::what() const throw()
 {
-    PRINT_COLOR(RED, "Year is not a valid number");
+    PRINT_COLOR(RED, "Yea2012-01-11 | -1r is not a valid number");
     return ("");
 }
 
@@ -53,22 +60,15 @@ const char *BitcoinExchange::OutFebruaryInvalidExpetion::what() const throw()
 }
 
 
-
 const char* BitcoinExchange::BadInputException::what() const throw()
 {
     PRINT_COLOR(RED, "Error: bad input");
 	return "";
 }
 
-const char* BitcoinExchange::TooLargeNumberException::what() const throw()
+const char* BitcoinExchange::InvalidNumberExpetion::what() const throw()
 {
-    PRINT_COLOR(RED, "Error: large number");
-	return "";
-}
-
-const char* BitcoinExchange::NotAPositiveNumberException::what() const throw()
-{
-    PRINT_COLOR(RED, "Error: not a positive number");
+    PRINT_COLOR(RED, "Error: Value is out of range");
 	return "";
 }
 
@@ -142,6 +142,21 @@ void	BitcoinExchange::CreatMap(void)
 	data.close();
 }
 
+bool  BitcoinExchange::isValidValue(double value) const //usar?
+{
+    try 
+    {
+        if (value < 0 || value > 1000000)
+            throw InvalidNumberExpetion();
+    }
+    catch (const std::exception& e) 
+    {
+        std::cerr <<  e.what();
+        return (false);
+    }
+    
+    return (true);
+}
 
 bool BitcoinExchange::isValidDate(const std::string date) const
 {
@@ -208,18 +223,17 @@ bool BitcoinExchange::isValidDate(const std::string date) const
     }
     catch (const std::exception& e) 
     {
-        std::cerr << "Caught exception: \n" << e.what() << '\n';
+        std::cerr <<  e.what();
     }
     return true;
 }
-
 
 
 std::string	BitcoinExchange::getData(std::string line) const//!melhorar
 {
 	size_t		sep;
 	std::string	key;
-
+   
 	sep = line.find(" | ");
 	if (sep == std::string::npos)
 		throw BadInputException();
@@ -229,9 +243,7 @@ std::string	BitcoinExchange::getData(std::string line) const//!melhorar
 	throw BadInputException();
 }
 
-bool isDigitOrDot(unsigned char x) {
-    return !std::isdigit(x) && x != '.';
-}
+
 
 double	BitcoinExchange::getValue(std::string line) const //!melhorar
 {
@@ -241,10 +253,8 @@ double	BitcoinExchange::getValue(std::string line) const //!melhorar
 	sep = line.find(" | ");
 	line = line.substr(sep + 3, line.size());
 	value = std::strtod(line.c_str(), NULL);
-	if (value < 0)
-		throw NotAPositiveNumberException();
-	if(value > 1000)
-		throw TooLargeNumberException();
+	if (!isValidValue(value))
+		return (0);
 	return (value);
 }
 
@@ -259,6 +269,29 @@ double	BitcoinExchange::getBottomDate(const std::string& targetDate) const //!me
 	return it->second;
 }
 
+bool BitcoinExchange::checkHead(std::string filename) const
+{
+    std::ifstream file(filename.c_str()); // Abre o arquivo
+    std::string firstLine;
+    
+    try{
+        if(!getline(file, firstLine)) // Lê a primeira linha
+        {
+            std::cerr << "Failed to read the first line from file: " << filename << std::endl;
+            return false;
+        }
+        if(firstLine != "Date | Value"){
+            throw InvalidHeadExpetion();
+            return false;
+        }
+    }
+    catch(const std::exception& e){
+        std::cerr << e.what();
+         exit(EXIT_FAILURE);
+    }
+    return true;
+}
+
 void BitcoinExchange::superCompare(std::string filename) const //!melhorar
 {
     std::ifstream	file;
@@ -268,40 +301,24 @@ void BitcoinExchange::superCompare(std::string filename) const //!melhorar
     
 	if(file.is_open())
 	{
-		getline(file, line);
+        
+        getline(file, line);// Ignora a primeira linha (cabeçalho)
+        
 		while(getline(file, line))
 		{
-            try
-			{
+            try{
 				std::string	key = getData(line);
 				double		value = getValue(line);
 				
 				std::cout << key << " => " << value << " = " << value * getBottomDate(key) << std::endl;
 			}
-            catch(const std::exception& e)
-            {
-                std::cerr << e.what() << '\n';
+            catch(const std::exception& e){
+                std::cerr << e.what();
             }
+            
         }
     }
 }
-
-
-// bool  BitcoinExchange::isValidValue(double value) const //usar?
-// {
-//     try 
-//     {
-//         if (value < 0 || value > 1000000)
-//             throw std::out_of_range("Value is out of range");
-//     }
-//     catch (const std::exception& e) 
-//     {
-//         std::cerr << "Caught exception: " << e.what() << '\n';
-//         return (false);
-//     }
-    
-//     return (true);
-// }
 
 
 void BitcoinExchange::printData() 
