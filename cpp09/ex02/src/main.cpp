@@ -6,41 +6,21 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 15:59:06 by joe               #+#    #+#             */
-/*   Updated: 2024/07/13 16:32:27 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/17 00:28:08 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/MutantStack.hpp"
-#include <iostream>
+#include "../includes/PmergeMe.hpp"
 
-int main()
+int main(int argc, char* argv[]) 
 {
-	MutantStack<int> mstack;
+    if (argc < 2) 
+    {
+        std::cerr << "Uso: " << argv[0] << " number1 number2 ... numeroN" << std::endl;
+        return 1;
+    }
 
-	mstack.push(5);
-	mstack.push(17);
+    PmergeMe pmerge(argc, argv);
 
-	std::cout << "top: " << mstack.top() << std::endl;
-
-	mstack.pop();
-
-	std::cout << "size: " << mstack.size() << std::endl;
-
-	mstack.push(3);
-	mstack.push(5);
-	mstack.push(737);
-	mstack.push(0);
-
-	MutantStack<int>::iterator it = mstack.begin();
-	MutantStack<int>::iterator ite = mstack.end();
-
-	++it;
-	--it;
-	while (it != ite)
-	{
-		std::cout << *it << std::endl;
-		++it;
-	}
-	std::stack<int> s(mstack);
-	return 0;
+    return 0;
 }
