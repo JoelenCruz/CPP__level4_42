@@ -6,7 +6,7 @@
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 14:02:30 by joe               #+#    #+#              #
-#    Updated: 2024/07/16 22:55:47 by jcruz-da         ###   ########.fr        #
+#    Updated: 2024/07/18 23:33:24 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@
 
 NAME		:=	PmergeMe
 CXX			:=	c++
-CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
+CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98 
 HEADERS		:=	./includes
-SRCS		:=	./src/main.cpp ./src/PmergeMe.cpp
+SRCS		:=	./src/main.cpp ./src/PmergeMe.cpp ./src/PmergeMeDeque.cpp
 OBJS		:=	$(SRCS:.cpp=.o)
 
 # *==============================================================================

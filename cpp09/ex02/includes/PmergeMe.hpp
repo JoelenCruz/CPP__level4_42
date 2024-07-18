@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:04:41 by joe               #+#    #+#             */
-/*   Updated: 2024/07/17 00:52:24 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/19 00:37:16 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 #include <vector>
 #include <cstdlib>
 #include <sys/time.h>
+#include <sys/time.h>
 # include <climits>
+#include <algorithm> 
+ #include <iomanip> // std::setprecision
+
 
 
 // =============================================================================
@@ -44,34 +48,65 @@ class PmergeMe
 		std::vector<int> _vector;
 		std::deque<int> _deque;
 
-		// struct timeval vec_start;
-		// struct timeval vec_end;
+		// Vector functions
+		void initVector(int size, char** args);
+		void printVector(const std::string& color) const ;
+		bool areAllEqualVector(std::vector<int>& vector);
+		std::vector<int> jacobsthalSequential(int number); 
+		std::vector<int> jacobsthalDiff(int number);
+		std::vector<int> sortVector(std::vector<int> vec);
+		void createPairs(const std::vector<int>& vec, std::vector<std::pair<int, int> >& pairs);
+		void processPairs(const std::vector<std::pair<int, int> >& pairs, 
+                            std::vector<int>& pend, 
+                            std::vector<int>& sorted);
+		void mergeAndInsert(std::vector<int>& pend, 
+                              std::vector<int>& sorted, 
+                              int last, 
+                              bool odd); 
+		void insertSorted(std::vector<int>& sorted, int value);
+		void fordJohnsonSortVector();
+		void measureExecutionTimeVector();
+		
 
-		void mergeVector(int left, int mid, int right);
-
-		void mergeDeque(int left, int mid, int right);
-		void fordJohnsonSortVector(int left, int right);
-		void fordJohnsonSortDeque(int left, int right);
+		// Deque functions
+		void initDeque(int size, char** args);
+		void printDeque(const std::string& color) const;
+		bool areAllEqualDeque(std::deque<int>& deque);
+		std::deque<int> jacobsthalSequentialDeque(int number); 
+		std::deque<int> jacobsthalDiffDeque(int number);
+		std::deque<int> sortDeque(std::deque<int> inputdeque);  
+		void createPairsDeque(const std::deque<int>& vec, std::deque<std::pair<int, int> >& pairs);
+		void processPairsDeque(const std::deque<std::pair<int, int> >& pairs,
+							std::deque<int>& pendingElements, 
+							std::deque<int>& sortedElements); 
+		void mergeAndInsertDeque(std::deque<int>& pendingElements, 
+								std::deque<int>& sortedElements, 
+								int lastElement, 
+								bool isOdd);
+		void insertSortedDeque(std::deque<int>& sorted, int value); 
+		void fordJohnsonSortDeque();
+		void measureExecutionTimeDeque(); 
 		
 
 	public:
 		PmergeMe();
 		PmergeMe(int argc, char* argv[]);
 		PmergeMe(const PmergeMe& a);
+		PmergeMe& operator=(const PmergeMe& other);
 		~PmergeMe();
-
-		void initVector(int size, char** args);
-		void initDeque(int size, char** args);
-
-		void insertionSortVector(int left, int right);
-		void insertionSortDeque(int left, int right);
-		void printVector(std::string color) const ;
-		void printDeque(std::string color) const ;
-		void measureExecutionTimeVector();
-		void measureExecutionTimeDeque();
-
-
 		class JustNumbers : public std::exception
+		{
+			public:
+			const char* what() const throw();
+		};
+
+		class AllEqual : public std::exception
+		{
+			public:
+			const char* what() const throw();
+		};
+
+		class ErrorParameter : public std::exception
 		{
 			public:
 			const char* what() const throw();
