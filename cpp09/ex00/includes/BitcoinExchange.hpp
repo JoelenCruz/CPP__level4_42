@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 22:31:51 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/14 15:29:24 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/17 22:04:11 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,41 +58,11 @@ class BitcoinExchange
 		bool checkHead(std::string filename) const;
 
 		
-		class	InvalidDateExpetion : public std::exception
-		{
-			public:
-			const char* what() const throw();
-		};
+		
 
-		class	YearInvalidExpetion : public std::exception
-		{
-			public:
-			const char* what() const throw();
-		};
+	
+	
 
-		class	MonthInvalidExpetion : public std::exception
-		{
-			public:
-			const char* what() const throw();
-		};
-
-		class	DayInvalidExpetion : public std::exception
-		{
-			public:
-			const char* what() const throw();
-		};
-
-		class	MonthDayInvalidExpetion : public std::exception
-		{
-			public:
-			const char* what() const throw();
-		};
-
-		class	OutFebruaryInvalidExpetion : public std::exception
-		{
-			public:
-			const char* what() const throw();
-		};
 
 		class	BadInputException : public std::exception
 		{
@@ -105,7 +75,14 @@ class BitcoinExchange
 			public:
 			const char* what() const throw();
 		};
-		class	InvalidNumberExpetion : public std::exception
+
+		class	InvalidNumberNegative : public std::exception
+		{
+			public:
+			const char* what() const throw();
+		};
+
+		class	InvalidNumberPositive : public std::exception
 		{
 			public:
 			const char* what() const throw();

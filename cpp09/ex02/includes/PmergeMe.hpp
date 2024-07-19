@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:04:41 by joe               #+#    #+#             */
-/*   Updated: 2024/07/19 00:37:16 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:12:17 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ class PmergeMe
 		std::vector<int> jacobsthalSequential(int number); 
 		std::vector<int> jacobsthalDiff(int number);
 		std::vector<int> sortVector(std::vector<int> vec);
-		void createPairs(const std::vector<int>& vec, std::vector<std::pair<int, int> >& pairs);
-		void processPairs(const std::vector<std::pair<int, int> >& pairs, 
+		void generatePairs(const std::vector<int>& vec, std::vector<std::pair<int, int> >& pairs);
+		void handlePairs(const std::vector<std::pair<int, int> >& pairs, 
                             std::vector<int>& pend, 
                             std::vector<int>& sorted);
 		void mergeAndInsert(std::vector<int>& pend, 
@@ -75,8 +75,9 @@ class PmergeMe
 		std::deque<int> jacobsthalSequentialDeque(int number); 
 		std::deque<int> jacobsthalDiffDeque(int number);
 		std::deque<int> sortDeque(std::deque<int> inputdeque);  
-		void createPairsDeque(const std::deque<int>& vec, std::deque<std::pair<int, int> >& pairs);
-		void processPairsDeque(const std::deque<std::pair<int, int> >& pairs,
+		
+		void generatePairsDeque(const std::deque<int>& vec, std::deque<std::pair<int, int> >& pairs);
+		void handlePairsDeque(const std::deque<std::pair<int, int> >& pairs,
 							std::deque<int>& pendingElements, 
 							std::deque<int>& sortedElements); 
 		void mergeAndInsertDeque(std::deque<int>& pendingElements, 

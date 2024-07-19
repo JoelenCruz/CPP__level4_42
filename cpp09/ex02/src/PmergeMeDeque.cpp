@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 23:16:52 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/19 00:45:25 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:17:02 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool PmergeMe::areAllEqualDeque(std::deque<int>& deque)
     return true;
 }
 
-void PmergeMe::createPairsDeque(const std::deque<int>& vec, std::deque<std::pair<int, int> >& pairs) 
+void PmergeMe::generatePairsDeque(const std::deque<int>& vec, std::deque<std::pair<int, int> >& pairs) 
 {
     // Iterate over the deque in steps of 2
     for (size_t i = 0; i < vec.size(); i += 2) {
@@ -98,7 +98,7 @@ std::deque<int> PmergeMe::jacobsthalDiffDeque(int number)
 }
 
 
-void PmergeMe::processPairsDeque(const std::deque<std::pair<int, int> >& inputPairs, 
+void PmergeMe::handlePairsDeque(const std::deque<std::pair<int, int> >& inputPairs, 
                             std::deque<int>& pendingElements, 
                             std::deque<int>& sortedElements) 
 {
@@ -169,12 +169,12 @@ std::deque<int> PmergeMe::sortDeque(std::deque<int> inputdeque)
 
     
     std::deque<std::pair<int, int> > pairs;
-    createPairsDeque(inputdeque, pairs); // Create pairs from the inputdeque
+    generatePairsDeque(inputdeque, pairs); // Create pairs from the inputdeque
 
     
     std::deque<int> pendingElements; // deques to store the pending elements and the sorted elements
     std::deque<int> sortedElements;
-    processPairsDeque(pairs, pendingElements, sortedElements);
+    handlePairsDeque(pairs, pendingElements, sortedElements);
     
     
     sortedElements = sortDeque(sortedElements); // Recursively sort the sortedElements deque
@@ -199,12 +199,15 @@ void PmergeMe::measureExecutionTimeDeque()
         std::cout << "All elements are equal\n";
         return;
     }
-    
+    size_t count = _deque.size();
     fordJohnsonSortDeque();
     clock_t end = clock();
+    
+
+    
 
     double  elapsed = double (end - start) / CLOCKS_PER_SEC * 1000000.0; // Medir em microssegundos
-    std::cout << "\nTime for deque: " << elapsed << " us\n";
+    std::cout << "\n[Deque] Time to process a range of " << count <<" elements wit : " << elapsed << " us\n";
 
 }
 

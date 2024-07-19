@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 22:12:05 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/19 00:41:00 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:17:53 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void PmergeMe::initVector(int size, char** args) {
     }
 }
 
-void PmergeMe::createPairs(const std::vector<int>& vec, std::vector<std::pair<int, int> >& pairs) 
+void PmergeMe::generatePairs(const std::vector<int>& vec, std::vector<std::pair<int, int> >& pairs) 
 {
     // Iterate over the vector in steps of 2
     for (size_t i = 0; i < vec.size(); i += 2) {
@@ -177,7 +177,7 @@ std::vector<int> PmergeMe::jacobsthalDiff(int number)
 }
 
 
-void PmergeMe::processPairs(const std::vector<std::pair<int, int> >& inputPairs, 
+void PmergeMe::handlePairs(const std::vector<std::pair<int, int> >& inputPairs, 
                             std::vector<int>& pendingElements, 
                             std::vector<int>& sortedElements) 
 {
@@ -248,12 +248,12 @@ std::vector<int> PmergeMe::sortVector(std::vector<int> inputVector)
 
     
     std::vector<std::pair<int, int> > pairs;
-    createPairs(inputVector, pairs); // Create pairs from the inputVector
+    generatePairs(inputVector, pairs); // Generete pairs from the inputVector
 
     
     std::vector<int> pendingElements; // Vectors to store the pending elements and the sorted elements
     std::vector<int> sortedElements;
-    processPairs(pairs, pendingElements, sortedElements);
+    handlePairs(pairs, pendingElements, sortedElements);
     
     
     sortedElements = sortVector(sortedElements); // Recursively sort the sortedElements vector
@@ -278,9 +278,10 @@ void PmergeMe::measureExecutionTimeVector() {
         std::cout << "All elements are equal\n";
         return;
     }
+    size_t count = _vector.size();
     fordJohnsonSortVector();
     clock_t end = clock();
 
     double elapsed = double(end - start) / CLOCKS_PER_SEC * 1000000; // Medir em microssegundos
-    std::cout << "\nTime for vector: " << elapsed << " us\n";
+     std::cout << "\n[Deque] Time to process a range of " << count <<" elements wit : " << elapsed << " us\n";
 }

@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 19:24:23 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/14 15:36:47 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/17 22:16:39 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,53 +22,21 @@ const char *BitcoinExchange::InvalidHeadExpetion::what() const throw()
     return ("");
 }
 
-
-const char *BitcoinExchange::InvalidDateExpetion::what() const throw()
-{
-    PRINT_COLOR(RED, "Invalid date format, should be 'YYYY-MM-DD'");
-    return ("");
-}
-
-const char *BitcoinExchange::YearInvalidExpetion::what() const throw()
-{
-    PRINT_COLOR(RED, "Yea2012-01-11 | -1r is not a valid number");
-    return ("");
-}
-
-const char *BitcoinExchange::MonthInvalidExpetion::what() const throw()
-{
-    PRINT_COLOR(RED, "Month is not a valid number");
-    return ("");
-}
-
-const char *BitcoinExchange::DayInvalidExpetion::what() const throw()
-{
-    PRINT_COLOR(RED, "Day is not a valid number");
-    return ("");
-}
-
-const char *BitcoinExchange::MonthDayInvalidExpetion::what() const throw()
-{
-    PRINT_COLOR(RED, "Month or day is out of range");
-    return ("");
-}
-
-const char *BitcoinExchange::OutFebruaryInvalidExpetion::what() const throw()
-{
-    PRINT_COLOR(RED, "Out February range");
-    return ("");
-}
-
-
 const char* BitcoinExchange::BadInputException::what() const throw()
 {
     PRINT_COLOR(RED, "Error: bad input");
 	return "";
 }
 
-const char* BitcoinExchange::InvalidNumberExpetion::what() const throw()
+const char* BitcoinExchange::InvalidNumberNegative::what() const throw()
 {
-    PRINT_COLOR(RED, "Error: Value is out of range");
+    PRINT_COLOR(RED, "Error: not a positive number.");
+	return "";
+}
+
+const char* BitcoinExchange::InvalidNumberPositive::what() const throw()
+{
+    PRINT_COLOR(RED, "Error: too large a number.");
 	return "";
 }
 
@@ -142,92 +110,21 @@ void	BitcoinExchange::CreatMap(void)
 	data.close();
 }
 
-bool  BitcoinExchange::isValidValue(double value) const //usar?
+bool	BitcoinExchange::isValidDate(std::string date) const
 {
-    try 
-    {
-        if (value < 0 || value > 1000000)
-            throw InvalidNumberExpetion();
-    }
-    catch (const std::exception& e) 
-    {
-        std::cerr <<  e.what();
-        return (false);
-    }
-    
-    return (true);
+	if (date.size() != 10)
+		return (false);
+	if (date[5] != '0' && date[5] != '1')
+		return (false);
+	if (date[8] > '3' || date[8] < '0')
+		return (false);
+	for (size_t i = 0; i < date.size(); i++)
+	{
+		if (!std::isdigit(date[i]) && date[i] != '-')
+			return (false);
+	}
+	return (true);
 }
-
-bool BitcoinExchange::isValidDate(const std::string date) const
-{
-    std::string year, month, day;
-    size_t firstHyphen = date.find('-');
-    size_t secondHyphen = date.find('-', firstHyphen + 1);
-
-    year = date.substr(0, firstHyphen);
-    month = date.substr(firstHyphen + 1, secondHyphen - firstHyphen - 1);
-    day = date.substr(secondHyphen + 1);
-
-    try 
-    {
-        if(year.size() != 4 || month.size() != 2 || day.size() != 2)
-        {   
-            throw BitcoinExchange::InvalidDateExpetion();
-            return false;
-        }
-            
-
-        // Check if year, month, and day are all digits
-        for(std::string::iterator it = year.begin(); it != year.end(); ++it)
-            if(!isdigit(*it))
-            {
-                throw BitcoinExchange::YearInvalidExpetion();
-                return false;
-            }
-                
-                
-        for(std::string::iterator it = month.begin(); it != month.end(); ++it)
-            if(!isdigit(*it))
-            {
-                throw BitcoinExchange::MonthInvalidExpetion();
-                 return false;
-            }
-                
-                
-        for(std::string::iterator it = day.begin(); it != day.end(); ++it)
-            if(!isdigit(*it))
-            {
-                throw BitcoinExchange::DayInvalidExpetion();
-                return false;
-            }
-                 
-
-        // Convert month and day to int and check if they are valid
-        int month_int = atoi(month.c_str());
-        int day_int = atoi(day.c_str());
-
-
-        if(month_int < 1 || month_int > 12 || day_int < 1 || day_int > 31)
-        {
-            throw BitcoinExchange::MonthDayInvalidExpetion();
-            return false;
-        }
-        
-        // Check february 29, 30 and 31 
-        if(month_int == 2 && day_int >= 29)
-        {
-            throw BitcoinExchange::OutFebruaryInvalidExpetion();
-            return false;
-        }
-            
-    }
-    catch (const std::exception& e) 
-    {
-        std::cerr <<  e.what();
-    }
-    return true;
-}
-
 
 std::string	BitcoinExchange::getData(std::string line) const//!melhorar
 {
@@ -238,12 +135,12 @@ std::string	BitcoinExchange::getData(std::string line) const//!melhorar
 	if (sep == std::string::npos)
 		throw BadInputException();
 	key = line.substr(0, sep);
+    
 	if (isValidDate(key))
 		return (key);
 	throw BadInputException();
+    return (key);
 }
-
-
 
 double	BitcoinExchange::getValue(std::string line) const //!melhorar
 {
@@ -253,8 +150,10 @@ double	BitcoinExchange::getValue(std::string line) const //!melhorar
 	sep = line.find(" | ");
 	line = line.substr(sep + 3, line.size());
 	value = std::strtod(line.c_str(), NULL);
-	if (!isValidValue(value))
-		return (0);
+	if (value < 0)
+		throw InvalidNumberNegative();
+	if(value > 1000)
+		throw InvalidNumberPositive();
 	return (value);
 }
 
@@ -280,7 +179,7 @@ bool BitcoinExchange::checkHead(std::string filename) const
             std::cerr << "Failed to read the first line from file: " << filename << std::endl;
             return false;
         }
-        if(firstLine != "Date | Value"){
+        if(firstLine != "date | value"){
             throw InvalidHeadExpetion();
             return false;
         }
@@ -320,7 +219,6 @@ void BitcoinExchange::superCompare(std::string filename) const //!melhorar
     }
 }
 
-
 void BitcoinExchange::printData() 
 {   
     
@@ -341,5 +239,3 @@ void BitcoinExchange::printData()
     
     PRINT_COLOR(GREEN, "\n#-#-#-#-#-#-#-#-#-#-#-#-\n");
 }
-
-

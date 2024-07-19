@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 23:47:58 by jcruz-da          #+#    #+#             */
-/*   Updated: 2024/07/16 00:30:34 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2024/07/16 23:04:58 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ const char * RPN::TooManyOperands::what() const throw()
 	PRINT_COLOR(RED, "Error: too many operands.");
 	 return"";
 }
-
-
-
-
-
 
 
 // =============================================================================
